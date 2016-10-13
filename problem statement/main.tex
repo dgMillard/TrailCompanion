@@ -1,0 +1,132 @@
+\documentclass[letterpaper,10pt,titlepage]{article}
+
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+
+\usepackage{geometry}
+\geometry{textheight=8.5in, textwidth=6in}
+
+\newcommand{\cred}[1]{{\color{red}#1}}
+\newcommand{\cblue}[1]{{\color{blue}#1}}
+
+\usepackage{hyperref}
+\usepackage{geometry}
+
+\def\name{Jiawei Liu}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {Problem Statement},
+  pdftitle = {Capstone Project},
+  pdfsubject = {Capstone Project},
+  pdfpagemode = UseNone
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    \Huge
+    \textbf{Santiam Wagon Trail Mobile App}
+    \textbf{Capstone Project}\\
+    \vspace{1.0cm}
+    \large
+    Developers: Charles Henninger, Duncan Millard, Jiawei Liu\\
+    Sponsor: Nancy Hildebrandt\\
+    \vspace{1.5cm}
+    \large
+    Instructor: D. Kevin McGrath\\
+
+    \large
+    CS 461, Fall 2016, Oregon State University\\
+    
+    \vspace{0.5cm}
+
+    \vspace{2.5cm}
+    %\textbf{Abstract}\\
+    \large
+    \underline{Abstract}\\
+    \vspace{0.3cm}
+    \end{center}
+    \large
+    
+    The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The app we will be self guided, and provide waypoints along the trail that contain information on the area, videos, and other points of interest. To accomplish this without an internet connection, we will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head. The app itself will be relatively small, as most of the content will be located within the content packages.  These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. The app will be designed to work with both Android and iOS, and distributed via the App Store and Google Play.
+
+
+    
+    \vspace{0.8cm}
+    \vfill
+    
+\begin{center}    
+    Oct 13, 2016
+
+\end{center}
+\end{titlepage}
+
+
+
+\begin{center}
+\underline{Problem Definition}\\
+\vspace{0.3cm}
+\end{center}
+
+The mobile app must be developed with the capability to provide the required services without the need to connect to the internet while at the trail site. The app must be able to provide an interactable map that provides waypoints along the trail that provide the user with information on the trail, videos, and/or points of interest on the trail. Content packages and the app itself must each require reasonably small downloads, and be available for both iOS and Android devices. Administrators must be able to create new content packages and upload them to the server with little technical knowledge (via a website). Lastly, the monetary cost of this project must be reasonably small and require minimal updates.\\
+\vspace{1.5cm}
+
+
+\begin{center}
+\underline{Problem Solution}\\
+\vspace{0.3cm}
+\end{center}
+
+The mobile app will be using a map created using Google, Avenza maps, or another third party map provider. In a Worst case scenario, we will create a bitmap of the Santiam trail to place waypoints onto. The problem of internet connectivity will be solved with downloaded content packs containing waypoints for the trail map and videos/text information relevant to each waypoint. These content packs will offer different tours and aspects of the trail, as well as localized information. Due to the mobile app running information found in these content packs, the app itself will be reasonably small, and each content pack will not be large enough to cause issues when downloading. We will be developing the app to run on both Android and iOS devices. We will keep the core of the app the same on both versions, only making changes where we need to for compatibility. We will create a relatively simple website that will allow administrators to upload waypoint locations and related videos and text documents to the server in an upload wizard. Finally, the only foreseeable cost for this app are the one time costs of putting the App onto Google Play/the app store, and the cost of keeping the website and server running (which will not be much through a provider like Amazon Web Services). We would like to be able to showcase a functional app and website for the engineering expo. \\
+\vspace{1.5cm}
+
+
+\begin{center}
+\underline{Problem Metrics}\\
+\vspace{0.3cm}
+\end{center}
+
+Our success will primarily be measured in the delivery of a functional app and website. Additional metrics will be the ease in which a user can download the app, download content packs, and use the app to go on a self guided tour while viewing relevant information on the trail. Success will also be measured in the ease with which administrators can upload new content packs to be available to mobile app users.\\
+\vspace{1.5cm}
+
+\newpage
+\textbf{ }
+\vspace{5.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Sponsor
+\vspace{3.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+
+\end{document}
