@@ -1,0 +1,196 @@
+\documentclass[letterpaper,10pt,titlepage]{article}
+
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+
+\usepackage{geometry}
+\geometry{textheight=8.5in, textwidth=6in}
+
+\newcommand{\cred}[1]{{\color{red}#1}}
+\newcommand{\cblue}[1]{{\color{blue}#1}}
+
+\usepackage{hyperref}
+\usepackage{geometry}
+
+\setcounter{secnumdepth}{4}
+\def\name{Jiawei Liu}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {Problem Statement},
+  pdftitle = {Capstone Project},
+  pdfsubject = {Capstone Project},
+  pdfpagemode = UseNone
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    \Huge
+    \textbf{Santiam Wagon Trail Mobile App}
+    \textbf{Capstone Project}\\
+    \vspace{1.0cm}
+    \large
+    Developers: Charles Henninger, Duncan Millard, Jiawei Liu\\
+    Sponsor: Nancy Hildebrandt\\
+    \vspace{1.5cm}
+    \large
+    Instructor: D. Kevin McGrath\\
+
+    \large
+    CS 461, Fall 2016, Oregon State University\\
+    
+    \vspace{0.5cm}
+
+    \vspace{2.5cm}
+    %\textbf{Abstract}\\
+    \large
+    \underline{Abstract}\\
+    \vspace{0.3cm}
+    \end{center}
+    \large
+    
+    The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The app we will be self guided, and provide waypoints along the trail that contain information on the area, videos, and other points of interest. To accomplish this without an internet connection, we will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head. The app itself will be relatively small, as most of the content will be located within the content packages.  These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. The app will be designed to work with both Android and iOS, and distributed via the App Store and Google Play.
+
+
+    
+    \vspace{0.8cm}
+    \vfill
+    
+\begin{center}    
+    Oct 28, 2016
+
+\end{center}
+\end{titlepage}
+
+
+\section{Introduction}
+\subsection{Purpose}
+The purpose of this Software Requirements Specifications (SRS) document is to describe to developers and/or users of this product the proposed interactions with relevant hardware, other programs, and human users. 
+
+\subsection{Scope}
+This product will include a mobile application, the Trail Companion, that will work with custom content packages downloaded in the app. A website will be included for administrators to upload content packages to a server where the application then request and download the packages. The mobile application will provide the user with an interactive map of an area, the user’s location, and waypoints on within the area containing information about the park. This application will require no internet access after downloading the content packages and application itself.
+
+\subsection{Definitions, Acronyms, and Abbreviations }
+\begin{table}[ht]
+\begin{tabular}{| l | p{9cm} |}
+\hline
+\textbf{Term} & \textbf{Definition} \\ \hline
+Admin / Administrator & User who has access to create, modify, and publish content packages. \\ \hline
+Android & Mobile operating system developed by Google for use in smartphones and tablets. \\ \hline
+Application Program Interface (API) & Interface specifying how software components can integrate with various parts of a project or external resources. \\ \hline
+Content Package & Compressed and signed archive containing a map of a region, as well as waypoints and other multimedia resources. \\ \hline
+Control Panel & Administration website used to create, update, publish, or otherwise control content packages. \\ \hline
+Global Positioning System (GPS) & Tool used to provide high-accuracy location services to devices without requiring internet service. Available as long as there is a sufficient view of the sky. \\ \hline
+iOS & Mobile operating system developed by Apple for use in Apple mobile products, such as the iPhone, iPad, or iTouch. \\ \hline
+Interpretive Event & Educational events hosting exhibits or other multimedia resources. \\ \hline
+Mobile Application (app) & A piece of software designed to be run on a particular type of mobile operating system. \\ \hline
+Open Street Maps (OSM) & Open/Freely licensed map software for map images, GPS locations, and directions. {[}1{]} \\ \hline
+POI & Point of Interest \\ \hline
+Santiam Wagon Road & A historical site in the Willamette National Forest. \\ \hline
+Signing & A process used to ensure software is coming from a known, good source and has not been tampered with. \\ \hline
+User & Visitors utilizing the application \\ \hline
+USFS & United States Forest Service \\ \hline
+Waypoint & Used to mark Points of Interest on maps, which will refer to sites with some form of multimedia content. \\ \hline
+\end{tabular}
+\end{table}                                                
+
+
+\subsection{References}
+\subsubsection{More to come, probably}
+\subsubsection{https://www.openstreetmap.org/about [ 1 ]}
+\vspace{0.3cm}
+
+\subsection{Overview}
+The rest of this document contains (in the order presented) further high level description of the product and the problem being addressed by it, as well as the specification requirements, User Stories, Appendix, and Index. 
+
+
+
+\section{Overall Description}
+The Sweet Home Ranger District of the Willamette National Forest hosts a number of interpretive events throughout the year, which are led by staff experts. These events incur a substantial time and labor  cost for their setup and operation, which occupy a significant portion of Ranger Station staff resources.  Due to a desire to expand public outreach, volunteers at the Sweet Home Ranger District have proposed the development of a mobile application to showcase one of their most well known trails, the Santiam Wagon Road Trail, with a self-guided tour. The mobile application must be developed with the capability to provide the required services without the need to connect to the internet. The application will be able to provide an interactive map that provides the user with their current location on a trail, as well as waypoints that provide information about points of interest along the trail in the form of videos, audio recordings, and text articles. Ranger Station staff must also be able to design and publish new events through a website with little technical knowledge. Finally, this project must have minimal recurring costs, and must be available for both iOS and Android devices.
+
+
+\section{Specific Requirements}
+\subsection{External Interface Requirements}
+\subsection{System Features}
+\subsubsection{Web Control Panel}
+Administrators must be able to create and upload new Content Packages using the website provided.
+\subsubsection{Mobile Applications}
+The application must display the user's location in the relevant area using GPS.\\
+The application must be able to display content packages currently available for download.
+
+\subsection{Performance Requirements}
+There must be an option for a Content Pack below 15MB. 
+
+\subsection{Design Constraints}
+This product must have an application that can use Content Packages without any connection to the internet.\\
+This product must rely on free/libre software, and avoid recurring software license fees.
+
+\subsection{Software System Attributes}
+Application must be both IOS, Android. Website must be cross browser.
+
+\subsection{Other Requirements}
+\vspace{0.5cm}
+
+
+\section{User Stories}
+\subsection{ }
+\textbf{\underline{Card}}: As a user, I want to see the waypoints on the map, so that I can know where should I visit.\\ 
+\textbf{\underline{Conversation}}: The user should have a chance to check waypoints on the map, especially visitors new to the trail. With the waypoints, visitors can see which places are good for sightseeing. This will a great convenience to visitors.\\
+\textbf{\underline{Confirmation}}: When user opens the app, the main page will display the map with waypoints. When user clicks a waypoint, there will be some videos and texts to introduce this area.
+
+\subsection{ }
+\textbf{\underline{Card}}: As a user, I want an app that can work without internet connection because there is no available internet connection on the trail.\\
+\textbf{\underline{Conversation}}: Because there is a possibly of having no cell phone signal on the trail, the app should work offline, provided the Content Pack was downloaded ahead of time. User should be able to see waypoints on the map without the internet connection.\\
+\textbf{\underline{Confirmation}}: Developer will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head.
+\subsection{ }
+\textbf{\underline{Card}}: As a user, I want to download the app via a official software store, so that I can make sure the app is safe to use.\\
+\textbf{\underline{Conversation}}: App safety is important for every user. An App Store is an official and credible method to download app. Otherwise, user won’t trust and download this app.\\
+\textbf{\underline{Confirmation}}: The app will work on both Android and iOS platform. The Developers will publish this app on the official app store for each platform, so users can download via Google Play and App Store.
+
+\section{Gantt Chart}
+\includegraphics[width=\textwidth]{gantt}
+
+
+
+
+
+\newpage
+\textbf{ }
+\vspace{5.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Sponsor
+\vspace{3.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+
+\end{document}
