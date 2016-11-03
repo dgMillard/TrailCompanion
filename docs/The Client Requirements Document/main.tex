@@ -1,4 +1,4 @@
-\documentclass[letterpaper,10pt,titlepage]{article}
+\documentclass[letterpaper, 10pt,titlepage]{article}
 
 \usepackage{graphicx}                                        
 \usepackage{amssymb}                                         
@@ -163,24 +163,20 @@ Application must be both IOS, Android. Website must be cross browser.
 \textbf{\underline{Conversation}}: App safety is important for every user. An App Store is an official and credible method to download app. Otherwise, user won’t trust and download this app.\\
 \textbf{\underline{Confirmation}}: The app will work on both Android and iOS platform. The Developers will publish this app on the official app store for each platform, so users can download via Google Play and App Store.
 
-\section{Gantt Chart}
-\begingroup
-\begin{please}
+
+\newpage
 \newpsstyle{Important}{fillstyle=solid,fillcolor=red}
 \newpsstyle{NotImportant}{fillstyle=vlines}
-\begin{PstGanttChart}{5}{7}
-\PstGanttTask{0}{3}
-\PstGanttTask{2}{1}
-\PstGanttTask[TaskStyle=Important,
-TaskInsideLabel=Important]{2}{5}
-\PstGanttTask[TaskStyle=NotImportant]{4}{2}
-\PstGanttTask{5}{2}
+\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1,
+ChartShowIntervals]{5}{7}
+\PstGanttTask[TaskOutsideLabel={Task 1}]{0}{3}
+\PstGanttTask[TaskOutsideLabel={Task 2},TaskUnitType=Day]{15}{3}%3 days start at
+15
+\PstGanttTask[TaskStyle=Important,TaskOutsideLabel={Task 3},
+TaskInsideLabel={\Large\textcolor{white}{\textbf{Important}}}]{2}{5}
+\PstGanttTask[TaskStyle=NotImportant,TaskOutsideLabel={Task 4}]{4}{2}
+\PstGanttTask[TaskOutsideLabel={Task 5}]{5}{2}
 \end{PstGanttChart}
-\end{please}
-\endgroup
-\xLkeyset{fillstyle=vlines}\xLenv{PstGanttChart}\xLcs{PstGanttTask}\xLkeyword{TaskStyle}
-\xLkeyword{TaskInsideLabel}
-
 
 
 
