@@ -8,6 +8,7 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{url}
+\usepackage{pst-gantt}
 
 \usepackage{balance}
 \usepackage[TABBOTCAP, tight]{subfigure}
@@ -163,8 +164,22 @@ Application must be both IOS, Android. Website must be cross browser.
 \textbf{\underline{Confirmation}}: The app will work on both Android and iOS platform. The Developers will publish this app on the official app store for each platform, so users can download via Google Play and App Store.
 
 \section{Gantt Chart}
-\includegraphics[width=\textwidth]{gantt}
-
+\begingroup
+\begin{please}
+\newpsstyle{Important}{fillstyle=solid,fillcolor=red}
+\newpsstyle{NotImportant}{fillstyle=vlines}
+\begin{PstGanttChart}{5}{7}
+\PstGanttTask{0}{3}
+\PstGanttTask{2}{1}
+\PstGanttTask[TaskStyle=Important,
+TaskInsideLabel=Important]{2}{5}
+\PstGanttTask[TaskStyle=NotImportant]{4}{2}
+\PstGanttTask{5}{2}
+\end{PstGanttChart}
+\end{please}
+\endgroup
+\xLkeyset{fillstyle=vlines}\xLenv{PstGanttChart}\xLcs{PstGanttTask}\xLkeyword{TaskStyle}
+\xLkeyword{TaskInsideLabel}
 
 
 
