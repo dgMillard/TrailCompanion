@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{url}
 \usepackage{pst-gantt}
+\usepackage{xspace}
 
 \usepackage{balance}
 \usepackage[TABBOTCAP, tight]{subfigure}
@@ -170,8 +171,7 @@ Application must be both IOS, Android. Website must be cross browser.
 \begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1,
 ChartShowIntervals]{5}{7}
 \PstGanttTask[TaskOutsideLabel={Task 1}]{0}{3}
-\PstGanttTask[TaskOutsideLabel={Task 2},TaskUnitType=Day]{15}{3}%3 days start at
-15
+\PstGanttTask[TaskOutsideLabel={Task 2},TaskUnitType=Day]{15}{3}%3 days start at 15
 \PstGanttTask[TaskStyle=Important,TaskOutsideLabel={Task 3},
 TaskInsideLabel={\Large\textcolor{white}{\textbf{Important}}}]{2}{5}
 \PstGanttTask[TaskStyle=NotImportant,TaskOutsideLabel={Task 4}]{4}{2}
