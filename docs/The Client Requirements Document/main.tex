@@ -1,5 +1,8 @@
 \documentclass[letterpaper, 10pt,titlepage]{article}
 
+\usepackage[utf8]{inputenc}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
 \usepackage{graphicx}                                        
 \usepackage{amssymb}                                         
 \usepackage{amsmath}                                         
@@ -8,6 +11,9 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{url}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
 \usepackage{pst-gantt}
 \usepackage[letterpaper, margin=0.75in]{geometry}
 \usepackage{balance}
@@ -32,6 +38,8 @@
   pdfsubject = {Capstone Project},
   pdfpagemode = UseNone
 }
+
+
 
 \begin{document}
 
@@ -59,13 +67,13 @@
     \end{center}
     \large
 
-    The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The app we will be self guided, and provide waypoints along the trail that contain information on the area, videos, and other points of interest. To accomplish this without an internet connection, we will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head. The app itself will be relatively small, as most of the content will be located within the content packages.  These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. The app will be designed to work with both Android and iOS, and distributed via the App Store and Google Play.
+    \tab The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The app we will be self guided, and provide waypoints along the trail that contain information on the area, videos, and other points of interest. To accomplish this without an internet connection, we will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head. The app itself will be relatively small, as most of the content will be located within the content packages.  These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. The app will be designed to work with both Android and iOS, and distributed via the App Store and Google Play.
     
     \vspace{0.8cm}
     \vfill
     
 \begin{center}    
-    Nov 3, 2016
+    Nov 4, 2016
 
 \end{center}
 \end{titlepage}
@@ -92,15 +100,15 @@ Admin / Administrator & User who has access to create, modify, and publish conte
 Android & Mobile operating system developed by Google for use in smartphones and tablets. \\ \hline
 Application Program Interface (API) & Interface specifying how software components can integrate with various parts of a project or external resources. \\ \hline
 Content Package & Compressed and signed archive containing a map of a region, as well as waypoints and other multimedia resources. \\ \hline
-Control Panel & Administration website used to create, update, publish, or otherwise control content packages. \\ \hline
+Web Control Panel & Administration website used to create, update, publish, or otherwise control content packages. \\ \hline
 Global Positioning System (GPS) & Tool used to provide high-accuracy location services to devices without requiring internet service. Available as long as there is a sufficient view of the sky. \\ \hline
 iOS & Mobile operating system developed by Apple for use in Apple mobile products, such as the iPhone, iPad, or iTouch. \\ \hline
 Interpretive Event & Educational events hosting exhibits or other multimedia resources. \\ \hline
 Mobile Application (app) & A piece of software designed to be run on a particular type of mobile operating system. \\ \hline
 Open Street Maps (OSM) & Open/Freely licensed map software for map images, GPS locations, and directions. {[}1{]} \\ \hline
 POI & Point of Interest \\ \hline
-Santiam Wagon Road & A historical site in the Willamette National Forest. \\ \hline
-Signing & A process used to ensure software is coming from a known, good source and has not been tampered with. \\ \hline
+Santiam Wagon Road & A historical site in the Willamette National Forest. [2] \\ \hline
+Signing & A process used to ensure software is coming from a known, good source and has not been tampered with. [3]\\ \hline
 User & Visitors utilizing the application \\ \hline
 USFS & United States Forest Service \\ \hline
 Waypoint & Used to mark Points of Interest on maps, which will refer to sites with some form of multimedia content. \\ \hline
@@ -109,8 +117,17 @@ Waypoint & Used to mark Points of Interest on maps, which will refer to sites wi
 
 
 \subsection{References}
-\subsubsection{More to come, probably}
-\subsubsection{https://www.openstreetmap.org/about [ 1 ]}
+
+[1] “OpenStreetMap,” \textit{OpenStreetMap}. [Online]. Available: https://www.openstreetmap.org/about. [Accessed: 04-Nov-2016]. \par
+
+
+[2] G. Harrison, “Santiam Wagon Road,” \textit{The Oregon Encyclopedia}. [Online]. Available: \\ https://oregonencyclopedia.org/articles/santiam\_wagon\_road/. [Accessed: 04-Nov-2016]. \par
+
+
+[3] “Introduction to Code Signing,” \textit{Microsoft Developer Network}. [Online]. Available: \\ https://msdn.microsoft.com/en-us/library/ms537361(v=vs.85).aspx. [Accessed: 04-Nov-2016]. 
+
+
+
 \vspace{0.3cm}
 
 \subsection{Overview}
@@ -124,24 +141,43 @@ The Sweet Home Ranger District of the Willamette National Forest hosts a number 
 
 \section{Specific Requirements}
 \subsection{External Interface Requirements}
+\subsubsection{Web Control Panel User Interface}
+Must be able to generate and publish new Content Packages that can be downloaded the the mobile applications.\\
+Must be able to edit and modify existing Content Packages.\\
+Must have restricted access to admins. All changes must be made by an authenticated admin.
+
+\subsubsection{Mobile Application User Interface}
+A user must be able to view available Content Packages directly in the mobile applications when internet access is available. \\
+A user must be able to select and download Content Packages.\\
+A user must be able to uninstall or remove downloaded Content Packages.
+
+\subsubsection{Interface Between Mobile Applications and Web Control Panel}
+The mobile applications will request available Content Packages from a JSON based HTTP interface on the Control Panel. \\
+The mobile applications will request downloads through the same interface.
+
+
 \subsection{System Features}
 \subsubsection{Web Control Panel}
 Administrators must be able to create and upload new Content Packages using the website provided.
+
 \subsubsection{Mobile Applications}
 The application must display the user's location in the relevant area using GPS.\\
 The application must be able to display content packages currently available for download.
 
 \subsection{Performance Requirements}
-There must be an option for a Content Pack below 15MB. 
+\subsubsection{Content Packages}
+There must be an option for a Content Packages below 50MB.\\
+There must be options for Content Packages that are accessible to the hearing impaired through closed captions or a transcription.
 
 \subsection{Design Constraints}
-This product must have an application that can use Content Packages without any connection to the internet.\\
-This product must rely on free/libre software, and avoid recurring software license fees.
+The mobile applications must be able to operate without internet access after initial setup.\\
+The product must rely on free/libre software, and avoid recurring software license fees.
 
 \subsection{Software System Attributes}
-Application must be both IOS, Android. Website must be cross browser.
-
-\subsection{Other Requirements}
+\subsubsection{Mobile Applications}
+Application must support both iOS and Android
+\subsubsection{Web Control Panel}
+Control Panel must be cross browser compatible.
 \vspace{0.5cm}
 
 
