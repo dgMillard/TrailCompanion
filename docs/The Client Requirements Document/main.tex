@@ -1,4 +1,4 @@
-\documentclass[letterpaper,10pt,titlepage]{article}
+\documentclass[letterpaper, 10pt,titlepage]{article}
 
 \usepackage{graphicx}                                        
 \usepackage{amssymb}                                         
@@ -8,20 +8,17 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{url}
-
+\usepackage{pst-gantt}
+\usepackage[letterpaper, margin=0.75in]{geometry}
 \usepackage{balance}
 \usepackage[TABBOTCAP, tight]{subfigure}
 \usepackage{enumitem}
 \usepackage{pstricks, pst-node}
-
-\usepackage{geometry}
-\geometry{textheight=8.5in, textwidth=6in}
-
-\newcommand{\cred}[1]{{\color{red}#1}}
-\newcommand{\cblue}[1]{{\color{blue}#1}}
-
 \usepackage{hyperref}
-\usepackage{geometry}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = black
+}
 
 \setcounter{secnumdepth}{4}
 \def\name{Jiawei Liu}
@@ -52,30 +49,31 @@
     Instructor: D. Kevin McGrath\\
 
     \large
-    CS 461, Fall 2016, Oregon State University\\
-    
-    \vspace{0.5cm}
+    CS 461, Fall 2016, Oregon State University\\    
 
-    \vspace{2.5cm}
-    %\textbf{Abstract}\\
+    \vspace{3.2cm}
+
     \large
     \underline{Abstract}\\
     \vspace{0.3cm}
     \end{center}
     \large
-    
+
     The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The app we will be self guided, and provide waypoints along the trail that contain information on the area, videos, and other points of interest. To accomplish this without an internet connection, we will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head. The app itself will be relatively small, as most of the content will be located within the content packages.  These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. The app will be designed to work with both Android and iOS, and distributed via the App Store and Google Play.
-
-
     
     \vspace{0.8cm}
     \vfill
     
 \begin{center}    
-    Oct 28, 2016
+    Nov 3, 2016
 
 \end{center}
 \end{titlepage}
+
+
+\tableofcontents
+\newpage
+
 
 
 \section{Introduction}
@@ -158,15 +156,51 @@ Application must be both IOS, Android. Website must be cross browser.
 \textbf{\underline{Conversation}}: Because there is a possibly of having no cell phone signal on the trail, the app should work offline, provided the Content Pack was downloaded ahead of time. User should be able to see waypoints on the map without the internet connection.\\
 \textbf{\underline{Confirmation}}: Developer will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head.
 \subsection{ }
-\textbf{\underline{Card}}: As a user, I want to download the app via a official software store, so that I can make sure the app is safe to use.\\
+\textbf{\underline{Card}}: As a user, I want to download the app via an official software store, so that I can make sure the app is safe to use.\\
 \textbf{\underline{Conversation}}: App safety is important for every user. An App Store is an official and credible method to download app. Otherwise, user won’t trust and download this app.\\
 \textbf{\underline{Confirmation}}: The app will work on both Android and iOS platform. The Developers will publish this app on the official app store for each platform, so users can download via Google Play and App Store.
 
+
 \section{Gantt Chart}
-\includegraphics[width=\textwidth]{gantt}
+\newpsstyle{Important}{fillstyle=solid,fillcolor=red}
+\newpsstyle{NotImportant}{fillstyle=vlines}
+\begin{center}
+ 
+\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1, ChartShowIntervals]{21}{9} 
+%\PstGanttTask[TaskOutsideLabel={Configure GIT and workflow}]{2}{3}
+
+%------------------------WEB----------------------------------
+\PstGanttTask[TaskInsideLabel={Web Control Panel}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={Temp Hosting},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={Content Packages Database},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={User Account Database},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={User Account Login},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Content Package Prototype},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Content Package Signing},TaskUnitType=Day]{38}{10}
+\PstGanttTask[TaskOutsideLabel={Content Acquisition API},TaskUnitType=Day]{48}{10}
+%------------------------ANDROID----------------------------------
+\PstGanttTask[TaskInsideLabel={Android Application}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Map Rendering},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={External PoC Resource},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Asset Downloading},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Usability},TaskUnitType=Day]{38}{20}
+%------------------------IOS-----------------------------------
+\PstGanttTask[TaskInsideLabel={iOS Application}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Map Rendering},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={External PoC Resource},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Asset Downloading},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Usability},TaskUnitType=Day]{38}{20}
 
 
+%\PstGanttTask[TaskStyle=Important,TaskOutsideLabel={Task 3}, TaskInsideLabel={\Large\textcolor{white}{\textbf{Important}}}]{2}{5}
+%\PstGanttTask[TaskStyle=NotImportant,TaskOutsideLabel={Task 4}]{4}{2}
+%\PstGanttTask[TaskOutsideLabel={Task 5}]{5}{2}
 
+\end{PstGanttChart}
+\end{center}
 
 
 \newpage
