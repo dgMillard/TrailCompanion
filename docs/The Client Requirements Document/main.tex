@@ -89,7 +89,7 @@
 The purpose of this Software Requirements Specifications (SRS) document is to describe to developers and/or users of this product the proposed interactions with relevant hardware, other programs, and human users. 
 
 \subsection{Scope}
-This product will include a mobile application, the Trail Companion, that will work with custom content packages downloaded in the app. A website will be included for administrators to upload content packages to a server where the application then request and download the packages. The mobile application will provide the user with an interactive map of an area, the user’s location, and waypoints on within the area containing information about the park. This application will require no internet access after downloading the content packages and application itself.
+This product will include a mobile application, the Trail Companion, that will work with custom content packages downloaded in the app. A website will be included for administrators to upload content packages to a server where the application then request and download the packages. The mobile application will provide the user with an interactive map of an area, the user’s location, and waypoints on within the area containing information about the park. This application will require no Internet access after downloading the content packages and application itself.
 
 \subsection{Definitions, Acronyms, and Abbreviations }
 \begin{table}[ht]
@@ -101,7 +101,7 @@ Android & Mobile operating system developed by Google for use in smartphones and
 Application Program Interface (API) & Interface specifying how software components can integrate with various parts of a project or external resources. \\ \hline
 Content Package & Compressed and signed archive containing a map of a region, as well as waypoints and other multimedia resources. \\ \hline
 Web Control Panel & Administration website used to create, update, publish, or otherwise control content packages. \\ \hline
-Global Positioning System (GPS) & Tool used to provide high-accuracy location services to devices without requiring internet service. Available as long as there is a sufficient view of the sky. \\ \hline
+Global Positioning System (GPS) & Tool used to provide high-accuracy location services to devices without requiring Internet service. Available as long as there is a sufficient view of the sky. \\ \hline
 iOS & Mobile operating system developed by Apple for use in Apple mobile products, such as the iPhone, iPad, or iTouch. \\ \hline
 Interpretive Event & Educational events hosting exhibits or other multimedia resources. \\ \hline
 Mobile Application (app) & A piece of software designed to be run on a particular type of mobile operating system. \\ \hline
@@ -136,7 +136,7 @@ The rest of this document contains (in the order presented) further high level d
 
 
 \section{Overall Description}
-The Sweet Home Ranger District of the Willamette National Forest hosts a number of interpretive events throughout the year, which are led by staff experts. These events incur a substantial time and labor  cost for their setup and operation, which occupy a significant portion of Ranger Station staff resources.  Due to a desire to expand public outreach, volunteers at the Sweet Home Ranger District have proposed the development of a mobile application to showcase one of their most well known trails, the Santiam Wagon Road Trail, with a self-guided tour. The mobile application must be developed with the capability to provide the required services without the need to connect to the internet. The application will be able to provide an interactive map that provides the user with their current location on a trail, as well as waypoints that provide information about points of interest along the trail in the form of videos, audio recordings, and text articles. Ranger Station staff must also be able to design and publish new events through a website with little technical knowledge. Finally, this project must have minimal recurring costs, and must be available for both iOS and Android devices.
+The Sweet Home Ranger District of the Willamette National Forest hosts a number of interpretive events throughout the year, which are led by staff experts. These events incur a substantial time and labor  cost for their setup and operation, which occupy a significant portion of Ranger Station staff resources.  Due to a desire to expand public outreach, volunteers at the Sweet Home Ranger District have proposed the development of a mobile application to showcase one of their most well known trails, the Santiam Wagon Road Trail, with a self-guided tour. The mobile application must be developed with the capability to provide the required services without the need to connect to the Internet. The application will be able to provide an interactive map that provides the user with their current location on a trail, as well as waypoints that provide information about points of interest along the trail in the form of videos, audio recordings, and text articles. Ranger Station staff must also be able to design and publish new events through a website with little technical knowledge. Finally, this project must have minimal recurring costs, and must be available for both iOS and Android devices.
 
 
 \section{Specific Requirements}
@@ -144,10 +144,11 @@ The Sweet Home Ranger District of the Willamette National Forest hosts a number 
 \subsubsection{Web Control Panel User Interface}
 Must be able to generate and publish new Content Packages that can be downloaded the the mobile applications.\\
 Must be able to edit and modify existing Content Packages.\\
-Must have restricted access to admins. All changes must be made by an authenticated admin.
+Must have restricted access to admins. All changes must be made by an authenticated Admin.\\
+Publishing Content Packages must be approved by a configurable number of additional Admins.
 
 \subsubsection{Mobile Application User Interface}
-A user must be able to view available Content Packages directly in the mobile applications when internet access is available. \\
+A user must be able to view available Content Packages directly in the mobile applications when Internet access is available. \\
 A user must be able to select and download Content Packages.\\
 A user must be able to uninstall or remove downloaded Content Packages.
 
@@ -170,14 +171,14 @@ There must be an option for a Content Packages below 50MB.\\
 There must be options for Content Packages that are accessible to the hearing impaired through closed captions or a transcription.
 
 \subsection{Design Constraints}
-The mobile applications must be able to operate without internet access after initial setup.\\
+The mobile applications must be able to operate without Internet access after initial setup.\\
 The product must rely on free/libre software, and avoid recurring software license fees.
 
 \subsection{Software System Attributes}
 \subsubsection{Mobile Applications}
 Application must support both iOS and Android
 \subsubsection{Web Control Panel}
-Control Panel must be cross browser compatible.
+Control Panel must be functional in the latest versions of Mozilla Firefox, Google Chrome, Microsoft Edge, and Apple Safari
 \vspace{0.5cm}
 
 
@@ -188,8 +189,8 @@ Control Panel must be cross browser compatible.
 \textbf{\underline{Confirmation}}: When user opens the app, the main page will display the map with waypoints. When user clicks a waypoint, there will be some videos and texts to introduce this area.
 
 \subsection{ }
-\textbf{\underline{Card}}: As a user, I want an app that can work without internet connection because there is no available internet connection on the trail.\\
-\textbf{\underline{Conversation}}: Because there is a possibly of having no cell phone signal on the trail, the app should work offline, provided the Content Pack was downloaded ahead of time. User should be able to see waypoints on the map without the internet connection.\\
+\textbf{\underline{Card}}: As a user, I want an app that can work without Internet connection because there is no available Internet connection on the trail.\\
+\textbf{\underline{Conversation}}: Because there is a possibly of having no cell phone signal on the trail, the app should work offline, provided the Content Pack was downloaded ahead of time. User should be able to see waypoints on the map without the Internet connection.\\
 \textbf{\underline{Confirmation}}: Developer will be using packages featuring different aspects of the trail, including videos and text documents, that can be downloaded prior to arrival at the trail head.
 \subsection{ }
 \textbf{\underline{Card}}: As a user, I want to download the app via an official software store, so that I can make sure the app is safe to use.\\
@@ -202,7 +203,7 @@ Control Panel must be cross browser compatible.
 \newpsstyle{NotImportant}{fillstyle=vlines}
 \begin{center}
  
-\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1, ChartShowIntervals]{21}{9} 
+\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1, ChartShowIntervals]{22}{9} 
 %\PstGanttTask[TaskOutsideLabel={Configure GIT and workflow}]{2}{3}
 
 %------------------------WEB----------------------------------
@@ -215,6 +216,7 @@ Control Panel must be cross browser compatible.
 \PstGanttTask[TaskOutsideLabel={Content Package Prototype},TaskUnitType=Day]{28}{10}
 \PstGanttTask[TaskOutsideLabel={Content Package Signing},TaskUnitType=Day]{38}{10}
 \PstGanttTask[TaskOutsideLabel={Content Acquisition API},TaskUnitType=Day]{48}{10}
+\PstGanttTask[TaskOutsideLabel={Tour Creation Usability},TaskUnitType=Day]{38}{25}
 %------------------------ANDROID----------------------------------
 \PstGanttTask[TaskInsideLabel={Android Application}]{1}{8}
 \PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
