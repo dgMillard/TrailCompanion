@@ -98,7 +98,7 @@
     \end{center}
     \large
 
-    \tab our new abstract should here XXXXXXXXXXXX
+    \tab Abstract
     
     \vspace{0.8cm}
     \vfill
@@ -133,24 +133,24 @@ Duncan Millard: Web Control Panel functionality, Inter-App framework
 \section{Jiawei Liu's Section}
 
 \subsection{iOS UI}
-Since the project required to design a mobile app on iOS platform. Therefore, the usability is an important part of the project. In iOS user interface design section, the problems are designing and implementing the UI for selecting content packages, downloading and removing them, as well as basics for tour layout. For solving these problems, there are three technologies are effectual, which are mobile web pages, Xcode and OpenGL ES.
+One of the platforms that we will be designing on for this project is the iOS platform. Due to the nature of this project, the usability of the mobile app is an important part of the project. In this iOS user interface design section, we will discuss the different options for handling problems such as designing and implementing the UI for selecting content packages, downloading and removing them, as well as basics for tour layout. For solving these problems, there are three technologies that may be effective; mobile web pages, Xcode and OpenGL ES.
 
 
 \textit{Solution A:} Mobile Web Page\\
-A web page is a page that displays on web browsers via an internet connection. The mobile web page is a kind of webpage that optimized for mobile devices such as smart phones and tablets. The purpose of using a mobile web page is displayed the map on screen, allow user select and download content packages and provide the tour information.
+A web page is a page that displays on web browsers via an internet connection. The mobile web page is a kind of webpage that optimized for mobile devices such as smart phones and tablets. The purpose of using a mobile web page is to displayed the map on screen, allowing the user to select and download content packages and provide the tour information.
 
 
 A high-caliber mobile web page relies on various technologies such as HTML, Cascading Style Sheets (CSS), JavaScript and PHP. In general, HTML is the standard markup language employed to create web pages and its elements form the building blocks of all websites [1]. HTML can only serve as a basic web page. CSS and JavaScript are the necessary technologies for beautify and add more functions in the web page. If the web page uses database to hold website data, PHP is an efficient technology to connect and modify the database. 
 
 
-Nowadays, our life is flooded with web pages. For example, Facebook, one of the most popular social website; Google Maps, a popular map website; YouTube, a famous video website. These websites are make-up of HTML, CSS, JavaScript and PHP. In addition, most websites also provide mobile version web page to bring better user experience with mobile devices. 
+Nowadays, our life is flooded with web pages. For example, Facebook (one of the most popular social websites out there), Google Maps (a popular map website), and YouTube (the famous video website). all utilize HTML, CSS, JavaScript and PHP. In addition, most websites also provide mobile version web page to bring better user experience with mobile devices.
 
 
 \textit{Solution B:} Using Xcode with Swift\\
-Xcode is an integrated development environment (IDE) that developed by Apple. Developers can use Xcode to develop both iOS and macOS applications. The purpose of using Xcode is designing and implementing the UI by a tool or a IDE, Due to the high integration of Xcode, this can bring some convenient and save our time to build the development environment.  
+Xcode is an integrated development environment (IDE) that developed by Apple. Developers can use Xcode to develop both iOS and macOS applications. The purpose of using Xcode is to design and implement the UI by a tool or a IDE, Due to the high integration of Xcode, this can bring some convenient and save our time to build the development environment.
 
 
-For using Xcode with swift, it is necessary in order to get acquainted with Xcode. As Figure 1 show, Xcode has the object library on the right side, and allow developers to drag an object from the library to the application. There are not that many techniques in the UI design section, it basically selects the object from the library and drags it to the design area. It is simple and visible.
+In order to use Xcode for Swift, it is necessary in order to get acquainted with Xcode. As Figure 1 show, Xcode has the object library on the right side, and allow developers to drag an object from the library to the application. There are not that many techniques in the UI design section, it basically selects the object from the library and drags it to the design area. It is simple and visible.
 
 \begin{figure}[ht]
     \centering
@@ -163,7 +163,7 @@ Xcode is the official IDE for developing iOS application, and is offered for fre
 
 
 \textit{Solution C:} OpenGL ES\\
-OpenGL ES is a royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles [2]. Therefore, OpenGL ES is the third option to design the UI for provide tour information, view the map and interact with content packages. 
+OpenGL ES is a royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles [2]. 
 
 
 OpenGL is the core technology used for 2D and 3D graph. OpenGL ES is a simplified version of OpenGL that eliminates redundant functionality to provide a library that is both easier to learn and easier to implement in mobile graphics hardware [3]. Therefore, OpenGL ES is an efficient development tool to design iOS application UI. 
@@ -172,11 +172,12 @@ OpenGL is the core technology used for 2D and 3D graph. OpenGL ES is a simplifie
 Most of iOS games are developed by OpenGL. For example, Flappy Brid can be developed by OpenGL ES easily. In addition, currently most iOS games are developed by OpenGL ES.
 
 
-In conclusion, we are planning on going with our second solution, Xcode. Because we are going to write an iOS application, not a 2D or 3D game. Therefore, OpenGL is not the best solution for us. Our application also requires to use without an internet connection. Hence, the mobile web page is not fit in this situation. Xcode is the official IDE that provided by Apple. It includes a suite of development tools for iOS, macOS, WatchOS and tvOS. Due to high integration of Xcode, developer can develop software with minimal troubles. Even Xcode is offered for free, it only available on macOS. Two of our team members are using windows laptops. Thus, they need to set the virtual machine to access Xcode.
+Because we are going to write an iOS application, not a 2D or 3D game, which makes OpenGL ill suited for this solution, we are planning on going with our second solution, Xcode. Our application also requires to use without an internet connection. Hence, the mobile web page is not fit in this situation. Xcode is the official IDE that provided by Apple. It includes a suite of development tools for iOS, macOS, WatchOS and tvOS. Due to high integration of Xcode, developer can develop software with minimal troubles. Even Xcode is offered for free, it only available on macOS. Two of our team members are using windows laptops. Thus, they need to set the virtual machine to access Xcode.
 
 
 \subsection{Web Control Panel UI}
 What has to be accomplished in this part of the solution is designing and implementing the tour creation. We need to design a website to allow administrators such as our client, Nancy to setup for map frame, click to add waypoints, click waypoints to add texts and videos. In order to control resource on the web, we need to design a dynamic website with a clear UI. Therefore, there are multiple methods that we can use for creating web control panel UI.
+
 
 
 \textit{Solution A:} Bootstrap\\
@@ -184,6 +185,7 @@ Bootstrap is the most popular HTML, CSS, and JavaScript framework for developing
 
 
 In general, syntax of Bootstrap is similar with HTML, which mentioned on “Mobile Web Page” section. However, Bootstrap is more powerful than HTML because it provided more functions such as preprocessors and universal framework. In addition, as Figure 2 shows, there are abundant themes available for free. We can apply these themes to create the website with an aesthetically pleasing UI. 
+
 
 \begin{figure}[ht]
     \centering
@@ -217,7 +219,7 @@ In this section, we are going to provide a solution that allows users download c
 
 
 \textit{Solution A:} WKWebView\\
-WKWebView is a class of iOS to interactive web content, such as for an in-app browser [8]. The purpose of using WKWebView object in our application is interactive with our server and load content package list for users. There is a symbol in WKWebView called loading content. With this symbol, we are able to set the webpage contents and base URL for users, then the user can select and download the package. Here is an example about creating a WKWebView programmatically [8].
+WKWebView is a class of iOS to interact with web content, such as an in-app browser [8]. We would use WKWebView objects in our application in order to interact with our server and load content package lists for users. There is a symbol in WKWebView called loading content. With this symbol, we are able to set the webpage contents and base URL for users, then the user can select and download the package. Here is an example about creating a WKWebView programmatically [8].
 
 \begin{minted}{swift}
 import UIKit
@@ -241,7 +243,7 @@ class ViewController: UIViewController, WKUIDelegate {
     }}
 \end{minted}
 
-WKWebView was starting at iOS 8. It is based on iOS operating system. Besides,  most iOS web browsers and in-app browsers are using WKWebView. For example, Safari and Twitter’s in-app browser. WKWebView is popular and necessary for iOS development.
+WKWebView was adding into the native codebase in iOS 8. Most iOS web browsers and in-app browsers are using WKWebView. For example, Safari and Twitter’s in-app browser. WKWebView is popular and necessary for iOS development.
 
 
 \textit{Solution B:} NSURLConnection \\
@@ -255,7 +257,7 @@ As a class of iOS, it is built on iOS operating system, and has it own syntax. M
 Since we have a web control panel for administrators, we can create a web page for users, and users can use phone browser such as Safari to view and download to phone storage. The purpose of using download from browsers is it is easy to implement and understand how this process works.
 
 
-Downloading directly is popular in Windows and Android. For example, users download a mp3 file from the internet, and use music software to play this mp3 file. This process can also be implemented in iOS. Downloading directly is relying on many internet technologies such as Http, ftp, web pages, etc. 
+Downloading files directly is popular in Windows and Android. For example, users download a mp3 file from the internet, and use music software to play this mp3 file. This process can also be implemented in iOS. Downloading directly is relying on many internet technologies such as Http, ftp, web pages, etc. 
 
 
 In conclusion, we are going to use NSURLConnection technics to download content packages from the web server. For display and select the available content packages, we will use WKWebView to display the available package data from our server. The reason that we don’t choose downloading directly is iOS has strict limitation on file operating. In addition, there is not any file explorer on iOS. This will bring a lot of trouble for users. Therefore, we choose the native iOS API, WKWebView and NSURLConnection to accomplish our project.
