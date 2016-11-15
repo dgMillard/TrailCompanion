@@ -339,8 +339,16 @@ Our criteria on this matter are that the specified compression tool must be roya
 
 
 \subsection{API and Database Design}
-balabalabala
+Given that the mobile applications will have complex interactions with the Web Control Panel, there will be some requirements for querying additional information. The mobile applications must be able to get, at minimum, a list of all available Content Packages (to be sorted or selectively shown) which must also contain a good deal of metadata such as version numbers, last edit dates, file sizes, and accessibility notes. In this fashion, we can inform the user ahead of downloading what exactly is available and what would the storage ramification be of downloading a given package. This will be critical as it will also allow us as developers to deny certain downloads if we can pre-determine that the mobile device has insufficient space or other limitations. In order to request this information, there is a requirement for a public facing API that conforms to some internally established standard. While that in itself will be decided in a design document, the critical component is identifying what the backend for this information will be.
 
+
+One simple method of approaching this would be to have Content Packages in a known directory on the server that the web server can pick through and profile each time it wants to tally available content packages and their respective sizes. This would follow a RESTFUL design, allowing GET requests to actually correspond to a file location. One downside to this method is there would be a requirement to have distinct files for each Content Package, as well as a metadata file that sits outside of the Package. This would potentially incur very high overheads when having to be constantly profiled for changes or in response to API queries.
+
+
+An alternative approach would be to wrap the Content Packages as BLOB data in a database. This then begs the issue of choosing which database approach best fits the needs of the project. One method would be to use a NoSQL approach, which stores data in a fashion analogous to JSON encoding [23]. This would allow the meta-data for a Content Package to be stored immediately alongside the archive. Secondarily, one could use a MySQL style database. With this approach, BLOBS would likely be stored in their own table with an ID, and Content Packages would be a set of metadata with an ID for the specific BLOB, to be returned upon request. This would have an advantage of not needing to constantly fetch a BLOB from memory.
+
+
+While NoSQL could implement a similar approach, our needs are relatively simple and lend themselves well to the relational style of MySQL. This would allow our solution more flexibility in updating Content Packages without needing to remove old copies of the underlying archive, as well as more for readily serve up metadata listings to the mobile applications to move the heavy parsing operations to the server, rather than potentially less than powerful mobile phones.
 
 
 
@@ -409,49 +417,38 @@ Available:
 "CentOS Project," \textit{Downloads}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
-
-
-
 \bibitem{16} 
 "GNU," \textit{Basic Tar Format}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
 \bibitem{17} 
 "bzip2," \textit{bzip2 and libbzip2}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
 \bibitem{18} 
 "gzip," \textit{gzip Faq}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
 \bibitem{19} 
 "Tukaani," \textit{A Quick Benchmark: Gzip vs. Bzip2 vs. LZMA}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
-
 \bibitem{20} 
 "PKWARE," \textit{.ZIP File Format Specification}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
-
-
 \bibitem{21} 
 "BashItOut," \textit{Linux Compression Comparison}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
-
 \bibitem{22} 
 "PKWARE," \textit{PRESS RELEASE}. [Online]. 
 \\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
 %%
-
+\bibitem{23} 
+"SitePoint," \textit{SQL vs NoSQL Differences}. [Online]. 
+\\Available: \texttt{https://www.sitepoint.com/sql-vs-nosql-differences/} [Accessed: 14-Nov-2016].
+%%
 
 
 
