@@ -308,13 +308,38 @@ Implementing our application with either Volley or Retrofit would require more w
 \vspace{0.5cm}
 
 \section{Duncan Millard's Section}
-\subsection{Server Configuration}
-balabalabala
+\subsection{Web Server Configuration}
+When setting up any new project, one of the most critical segments is to determine what will the underlying architecture be for the current development and future release. This product solution is a three pieced tool, with a singular web server and two flavors of mobile application. The primary web server, referred internally as the Web Control Panel, will be in charge of a host of tasks. These tasks will include creating the Content Packages for the applications, which are archives containing multimedia files and a map file, serving the Content Packages to the client apps, and providing an interface for the apps to query available and updated Content Packages. For these tasks, we will be using a singular server that will serve all our resources. While this can be spread to other systems in the future, or farmed off to increase capability, choosing an underlying operating system is a very important decision to make before beginning development.
+
+
+There are currently several options for what we can use for a Linux host. The first option, which is a staple for most beginner users and many industry applications, would be Ubuntu, a derivative of Debian produced by Canonical. While Ubuntu is known for its ease of use, that is not a primary concern for this project’s operating system, as it will be exclusively managed by skilled users. Ubuntu has several defining features that make up its claim to fame. The first of which is regular long term support (LTS) releases that are released with five year support windows [10]. This allows for more infrequent core upgrades to stay up to date, and increases the likelihood of receiving useful help in community forums. Ubuntu also has frequent updates and emphasizes newer code and package versions, as seen in its use of the 4.4 Linux kernel and  cutting edge versions of Docker, MySQL, and TomCat.[10]. 
+
+
+Another option is Red Hat Enterprise Linux, commonly known by its acronym RHEL. While Ubuntu was based on Debian systems and the apt-get package manager, RHEL is an alternative utilizing the yum package manager. RHEL is specifically designed to offer high quality security provisions, high uptime, and high load capability[11]. RHEL is also specifically designed so that their primary business model is selling support contracts, which means for high severity configuration issues or vulnerabilities there is a very short turn-around time. For severity 1 issues (top priority), there is as little as a 1 hour response [12]. While this sounds excellent from a maintenance and support perspective, this also incurs an annual cost to maintain the contract, in the range of $799 to $1299 annually [13]. While this product has many appealing features, this price puts the tool outside of our available resources.
+
+
+As a final alternative for consideration, there is the Community Enterprise Operating System project, or CentOS for short. This is a system that is based on the RHEL project, but debrands all RedHat icons and images to make a completely free operating system [14]. This product gives similar advantages to RHEL, namely the focus on stability and long term support. The CentOS project current has a 10 year support window for the current version, CentOS 7 [15]. This comes at the cost of less frequent updates, and virtually no updates that break backwards compatibility, such as major version updates. CentOS has a widely active community on their forums, as well as local support as this is the primary operating system that is active on the OSU Flip servers.
+
+
+For this project, we will be selecting the CentOS project for our operating system. It satisfies both of our primary criteria, which are stability and cost. CentOS is free to download and use, and we can take advantage of the 10 year support cycle to minimize service disruptions and reduce the system admin overhead for this system. While measures will need to be taken to ensure periodic security patches are pulled in, this should certainly help in the long run with keeping a consistent base operating system.
 
 
 
-\subsection{File Integrity Verification }
-balabalabala
+
+\subsection{Compression Methods}
+As our product will be running on multiple platforms, finding software that is common across platform boundaries is paramount to a successful development cycle. Our mobile applications must be able to receive an information bundle from our Web Control Panel, which will be referred to as a Content Package. The Content Packages must contain several critical components, such as multimedia educational materials (videos and audio recordings), text transcripts, map tile information, and point of interesting coordinates. This data may be quite large in size in some Content Packages, as there may be a need to supply the mobile applications with many video clips ranging anywhere from one to two minutes up to five to ten minutes. These video clips would ideally be delivered in as high a resolution as is possible for a user's device. In smaller Content Packages, videos will be replaced with audio or text transcriptions removing the need for peak compression efficiency. The two most critical components to verify when satisfying this requirement is the decompression speeds, as well as the effective compression.
+
+
+There are three primary techniques that are viable options for approaching the compression for this project. The first of which being a combination of tar archives and bz2 compression, as well as tar and gzip. Tar archiving works by combining several files and wrapping them together as one file. This does not perform compression in this stage, it simply binds all the files together into one so it may be treated as a singular file. This may have compression applied to it, or may be transmitted as a singular object [16]. Bzip2, or bz2, is a highly efficient compression scheme utilizing Burrows-Wheeler block sorting and a Huffman encoding [17]. This process works to achieve near peak compression rates at the expense of cost. While compression time is not of much concern, as it will be performed on a dedicated server, decompression on the client side is a very real concern as files will need to be frequently decompressed and accessed, without having large space allocations of decompressed files.
+
+
+Gzip is another tool that builds upon the tar archive. While both gzip and bzip2 are technically unrelated to tar files, they can only compress a singular file  [18]. Tar files allow them both to have a single compression target, resulting in a compressed archive. Gzip, in contrast to bzip2, decompresses significantly faster (varying, approx 4x - 12x) than bzip2 at the expense of slightly less compression (approximately 15\% larger files with gzip) [19]. Both gzip and bzip2 are considered patent free, requiring no royalties of any kind. 
+
+
+Finally, as a departure from the Unix specialized tools specified above, there is the zip format. Zip is heavily used in the Windows operating system as the primary archival method. Zip works by compressing individual files, and then archiving the entire collection [20]. This is directly opposite the approach that the gzip and bzip2 standards take. This has an added advantage that singular files can be extracted and decompressed without requiring the entire archive to be loaded into memory and decompressed. This gives an significant benefit if the average use-case is one file at a time. Zip is approximately on par with gzip for compression time and compression ratios, yet frequently has a higher decompression rate [21]. Finally, the zip standard has been donated to the public domain in 1989 [22].
+
+
+Our criteria on this matter are that the specified compression tool must be royalty free, must give preference to decompression speed over file size, and must have a minimal memory footprint to operate. This leads the Zip format to be the best candidate for our uses in the problem solution. Zip can allow for selectively extracting files, is public domain, and provides one of the fasted decompression rates in many trials[21]. 
 
 
 
@@ -326,7 +351,7 @@ balabalabala
 
 
 \newpage %add references at here
-\begin{thebibliography}{9}
+\begin{thebibliography}{22}
 
 \bibitem{1} 
 "W3C," \textit{W3C}. [Online]. Available:
@@ -365,18 +390,72 @@ Available:
 "Apple Developer," \textit{NSURLConnection}. [Online]. 
 \\Available: \texttt{https://developer.apple.com/reference/foundation/nsurlconnection} [Accessed: 14-Nov-2016].
 %%
+\bibitem{10} 
+"Ubuntu," \textit{Ubuntu Server}. [Online]. 
+\\Available: \texttt{https://www.ubuntu.com/server} [Accessed: 14-Nov-2016].
+%%
+\bibitem{11} 
+"Red Hat," \textit{Red Hat Enterprise Linux}. [Online]. 
+\\Available: \texttt{https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux} [Accessed: 14-Nov-2016].
+%%
+\bibitem{12} 
+"Red Hat," \textit{Production Support}. [Online]. 
+\\Available: \texttt{https://access.redhat.com/support/offerings/production/sla} [Accessed: 14-Nov-2016].
+%%
+\bibitem{13} 
+"Red Hat," \textit{Catalog}. [Online]. 
+\\Available: \texttt{https://www.redhat.com/wapps/store/catalog.html} [Accessed: 14-Nov-2016].
+%%
+\bibitem{14} 
+"CentOS Project," \textit{About CentOS}. [Online]. 
+\\Available: \texttt{https://www.centos.org/about/} [Accessed: 14-Nov-2016].
+%%
+\bibitem{15} 
+"CentOS Project," \textit{Downloads}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
 
 
 
 
+\bibitem{16} 
+"GNU," \textit{Basic Tar Format}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
+
+\bibitem{17} 
+"bzip2," \textit{bzip2 and libbzip2}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
+
+\bibitem{18} 
+"gzip," \textit{gzip Faq}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
+
+\bibitem{19} 
+"Tukaani," \textit{A Quick Benchmark: Gzip vs. Bzip2 vs. LZMA}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
+
+
+\bibitem{20} 
+"PKWARE," \textit{.ZIP File Format Specification}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
 
 
 
+\bibitem{21} 
+"BashItOut," \textit{Linux Compression Comparison}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
 
 
-
-
-
+\bibitem{22} 
+"PKWARE," \textit{PRESS RELEASE}. [Online]. 
+\\Available: \texttt{https://wiki.centos.org/Download} [Accessed: 14-Nov-2016].
+%%
 
 
 
