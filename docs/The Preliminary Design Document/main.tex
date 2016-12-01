@@ -1,0 +1,357 @@
+\documentclass[letterpaper, 10pt,titlepage]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{url}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\usepackage{pst-gantt}
+\usepackage[letterpaper, margin=0.75in]{geometry}
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = black
+}
+\usepackage{listings}
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+\usepackage{minted}
+
+
+
+
+\setcounter{secnumdepth}{4}
+\def\name{Jiawei Liu}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {Problem Statement},
+  pdftitle = {Capstone Project},
+  pdfsubject = {Capstone Project},
+  pdfpagemode = UseNone
+}
+
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    \Huge
+    \textbf{The Preliminary Design Document}\\
+    \textbf{Capstone Project}\\
+    \vspace{1.0cm}
+    \large
+    Developers: Charles Henninger, Duncan Millard, Jiawei Liu\\
+    Sponsor: Nancy Hildebrandt\\
+    \vspace{1.5cm}
+    \large
+    Instructor: D. Kevin McGrath\\
+
+    \large
+    CS 461, Fall 2016, Oregon State University\\    
+
+    \vspace{3.2cm}
+
+    \large
+    \underline{Abstract}\\
+    \vspace{0.3cm}
+    \end{center}
+    \large
+
+    \tab The Santiam wagon trail is historic trail located in the Willamette National Forest. The local ranger stations wish to have a mobile app that is capable of taking users on a tour of the wagon trail without needing a connection to the internet. The mobile application come in two forms: one developed for the Android mobile platform, and the other developed for the iOS mobile platform. While these two forms of the mobile application will be developed separately, they will be using the same methods of providing a tour to the user. The mobile application will render a map using a pre-downloaded map tile file and place waypoints onto the map that will be related to relevant information, in the form of videos and text files, about that area of the map. In order to achieve this functionality without internet access, we will rely on pre-downloaded content packs that will contain the map tiles, videos, text files, and waypoint information. These content packages will be created by staff of the local ranger stations, and uploaded via a website that will be developed along with the mobile app. Our team will divide these three larger sections of this project (the Android application, iOS application, and the Web Control panel/backend engineering) between the team members as follows: Android application development: Charles Henninger, Web Control panel/backend engineering: Duncan Millard, iOS application development: Jiawei Liu. This document outlines the possible technologies that will be used to address problems in each of these three major development sections, written by the team member heading each of the sections.
+    
+    \vspace{0.8cm}
+    \vfill
+    
+\begin{center}    
+    Dec 1, 2016
+
+\end{center}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+
+
+\section{Introduction}
+\subsection{Purpose}
+pending
+
+\subsection{Scope}
+pending
+                                       
+\subsection{Context}
+pending
+
+\subsection{Summary}
+pending
+
+\vspace{0.3cm}
+
+
+
+\section{Glossary}
+pending
+
+
+
+\section{Body}
+\subsection{Identified stakeholders and design concerns}
+pending
+
+\subsection{Design viewpoint: Interface}
+Do we need to introduce what is interface at here?
+
+\subsubsection{iOS UI}
+One of the platforms that we will be designing on for this project is the iOS platform. Due to the nature of this project, the usability of the mobile app is an important part of the project. In this iOS user interface design section, we will discuss the different options for handling problems such as designing and implementing the UI for selecting content packages, downloading and removing them, as well as basics for tour layout. For solving these problems, I choose Xcode as the solution.
+
+Xcode is an integrated development environment (IDE) that developed by Apple. Developers can use Xcode to develop both iOS and macOS applications. The purpose of using Xcode is to design and implement the UI by a tool or a IDE, Due to the high integration of Xcode, this can bring some convenient and save our time to build the development environment.
+
+In order to use Xcode for Swift, it is necessary in order to get acquainted with Xcode. As Figure 1 show, Xcode has the object library on the right side, and allow developers to drag an object from the library to the application. There are not that many techniques in the UI design section, it basically selects the object from the library and drags it to the design area. It is simple and visible. Xcode is the official IDE for developing iOS application, and is offered for free. Therefore, most iOS applications are developed by Xcode. For example, Safari, eBay, Expedia, etc.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{j1}
+    \caption{Xcode Interface [1]}
+    \label{jiawei1}
+\end{figure}
+
+When I start to design iOS application UI, I will create a new project in Xcode first. Xcode includes many built-app templates for developing iOS apps, such as tabbed application, game and page-based application. For this project, I will use single view application to start our project. Then, Xcode will show a dialog to let me name the app and choose additional options. After these setting steps, the Xcode will show the design interface which similarity with Figure 1. For our project, I will drag the necessary objects from the library to the application. I will add a few (3 or 4) buttons on the bottom of application to separate functions into different sections. In addition, since we are designing a map application, I will show the map on the home page with user’s location and viewpoints. Here is a rough iOS UI for our project.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{j2}
+    \caption{Rough iOS UI}
+    \label{jiawei2}
+\end{figure}
+
+For design the UI, I will drag a Map View from Object Library to the view controller and use MapKit API display the map with user’s location on the home screen, and list the viewpoints under the map. On the bottom of app, there are four (or less) menus to classify all function. For example, since our project need to download content packages for using app without network connection, the downloading/removing content package function will in the setting menu. In a word, I will create iOS app UI by dragging the relevant object from the library to the application to make the UI easy to use and understand.
+
+
+\subsubsection{Web Control Panel UI}
+What has to be accomplished in this part of the solution is designing and implementing the tour creation. We need to design a website to allow administrators such as our client, Nancy to setup for map frame, click to add waypoints, click waypoints to add texts and videos. In order to control resource on the web, we need to design a dynamic website with a clear UI. Therefore, we are going to use Bootstrap and jQuery to create web control panel UI. 
+
+
+Bootstrap is the most popular HTML, CSS, and JavaScript framework for developing responsive, mobile-first web sites [2]. In addition, Bootstrap is offered for free. Everybody can download and use it. The purpose of using Bootstrap is creating a dynamic website as the web control panel for our client to control online texts and videos resources. 
+
+
+In general, syntax of Bootstrap is similar with HTML technique. However, Bootstrap is more powerful than HTML because it provided more functions such as preprocessors and universal framework. In addition, as Figure 3 show, there are abundant themes available for free. We can apply these themes to create the website with an aesthetically pleasing UI. As the most popular framework for developing websites, there are a number of websites are using Bootstrap, such as NBA.com, Walmart, gliffy, etc.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{j3}
+    \caption{Free Bootstrap Templates [3]}
+    \label{jiawei3}
+\end{figure}
+
+jQuery is a library of JavaScript. The purpose of using jQuery is it easy to learn and apply in the web page. The jQuery library contains these features, which are HTML/DOM manipulation, CSS manipulation, HTML event methods, Effects and animations, AJAX and Utilities [4]. With jQuery, developers can write less code to achieve the same goal on web pages. 
+
+
+Since jQuery is a JavaScript library and has many features of HTML, it based on JavaScript, HTML and CSS. We can consider jQuery as a highly-integrated development tool to simplify web development process. jQuery is a necessary technology for developing dynamic web pages. Therefore, a lot of famous websites used jQuery, such as Google Maps, Google Doc, Netflix, etc.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{j4}
+    \caption{Rough Web Control Panel UI}
+    \label{jiawei4}
+\end{figure}
+
+For design the Web Control Panel UI, I will start with a bare Bootstrap template, which only contains a navigation bar at the top. I provide a rough web control panel UI (Figure 4), the basic operation logic will be similarly with my iOS UI, which is display the map on the main page. After login/register, the administrator will be able to add new viewpoints with text instructions and videos. Once the administrator input all information of the viewpoints, the administrator just click “Submit” button to upload all information into our database. For displaying the map, I will use Bootstrap to leave an area and use jQuery to make the map dynamic and operable. On the navigation bar, I will add a few HTML buttons for providing more functions. For example, a webpage to let administrator modify the viewpoint which already saved in the database. I will use a HTML form to display all saved viewpoints and let the administrator to edit them. In a word, Bootstrap is the main method to design the layout of web control panel UI, and jQuery is the main method to make the map dynamic and operable.
+
+
+\subsection{Design viewpoint: Interaction}
+
+\subsubsection{Remote API Interactions}
+In this section, we are going to provide a solution that allows users download content packages to their iOS devices. Users also permit to see all available content packages and select the package that they wish to download. After users choose the package, the application start to download the package by making an API call to the web server. To achieve this goal, we have two technologies available, which are WKWebView and NSURLConnection.
+
+
+WKWebView is a class of iOS to interactive web content, such as for an in-app browser [5]. The purpose of using WKWebView object in our application is interactive with our server and load content package list for users. There is a symbol in WKWebView called loading content. With this symbol, we are able to set the webpage contents and base URL for users, then the user can select and download the package. Here is an example about creating a WKWebView programmatically [5].
+
+\begin{minted}{swift}
+import UIKit
+import WebKit
+class ViewController: UIViewController, WKUIDelegate {
+    
+    var webView: WKWebView!
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let myURL = URL(string: "https://www.apple.com")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+    }}
+\end{minted}
+
+
+WKWebView was starting at iOS 8. It is based on iOS operating system. Besides, most iOS web browsers and in-app browsers are using WKWebView. For example, Safari and Twitter’s in-app browser. WKWebView is popular and necessary for iOS development.
+
+
+NSURLConnection is similar with WKWebView. It is also a class iOS. A NSURLConnection object lets you load the contents of a URL by providing a URL request object [6]. Therefore, the purpose of using NSURLConnection is loading content packages from the web server by a URL request. 
+
+
+As a class of iOS, it is built on iOS operating system, and has its own syntax. Most iOS applications are using NSURLConnection to connect to server and load packages. For example, some huge iOS games are required download data packages to the device. These games used NSURLConnection technology. And then, this situation is analogous with downloading content packages to iOS devices.
+
+
+In our application, we are going to use WKWebView class to display the available package data from our server. First, I will create a new WKWebView object using the init(frame:configuration:) method. And then, I will use the load(\_:) method to begin loading web content from our server and display all available content packages. If the user wants to stop loading the page, I will provide a stop button by stopLoading() method to stop loading. As Listing 1 show, I will include my URL in the code and begin to load the content by an API call. In addition, we are going to utilize NSURLConnection technics to download content packages from the web server. I will create a URL connection object with a delegate object that conforms to the NSURLConnectionDelegate and NSURLConnectionDataDelegate protocols. And then, once the user selects the content package, the app will send a request to the server. In detail, the NSURLConnectionDelegate protocol is mainly used for credential handling, but also handles connection completion. connection(\_:willSendRequestFor:) is the actual method to send requires. We just replace with our URL in the code, the request will send to our server and start to download the content package.
+
+
+
+\subsection{Design viewpoint: ???}
+
+\subsubsection{???}
+context is here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Design rationale}
+pending
+
+
+
+\section{Conclusion}
+pending
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage %add references at here
+\begin{thebibliography}{9}
+
+%%
+\bibitem{1} 
+"Apple," \textit{Interface Builder Built-In}. [Online]. Available:
+\texttt{https://developer.apple.com/xcode/interface-builder/} [Accessed: 14-Nov-2016].
+%%
+\bibitem{2} 
+"w3schools," \textit{Bootstrap 3 Tutorial}. [Online]. Available:
+\texttt{http://www.w3schools.com/bootstrap/} [Accessed: 14-Nov-2016].
+%%
+\bibitem{3} 
+"Start Bootstrap," \textit{All Templates}. [Online]. Available:
+\texttt{https://startbootstrap.com/template-categories/all/} [Accessed: 14-Nov-2016].
+%%
+\bibitem{4} 
+"w3schools," \textit{jQuery Introduction}. [Online]. Available:
+\texttt{http://www.w3schools.com/jquery/jquery\_intro.asp} [Accessed: 14-Nov-2016].
+%%
+\bibitem{5} 
+"Apple Developer," \textit{WKWebView}. [Online]. Available:
+\texttt{https://developer.apple.com/reference/webkit/wkwebview} [Accessed: 14-Nov-2016].
+%%
+\bibitem{6} 
+"Apple Developer," \textit{NSURLConnection}. [Online]. 
+\\Available: \texttt{https://developer.apple.com/reference/foundation/nsurlconnection} [Accessed: 14-Nov-2016].
+%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{thebibliography}
+\end{document}
