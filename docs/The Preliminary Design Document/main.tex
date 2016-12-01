@@ -141,8 +141,34 @@ pending
 \subsection{Identified stakeholders and design concerns}
 pending
 
+
+
+
+
+
+
+\subsection{Design viewpoint: Context}
+Do we need to introduce what is interface at here?
+
+\subsubsection{Map rendering}
+What must be accomplished in this part of the solution is making a map visible and capable of interaction with the user. We will need to display a relevant map of the tour area, capable of zooming, refocusing on the location of the user, and displaying waypoints on the map that contain relevant information about the area, including videos and text files. In order to get quality offline map tiles that we can use in our application, we have decided to use libraries connected to OpenStreetMaps, a project that provides free geographic data for use in rendering maps. OpenStreetMaps has many libraries that may provide us the means to render maps offline. At this point in time, we are planning on going with our second option, Mapbox GL, for implementation on both the IOS and Android platform. Mapbox GL is a free service that offers high quality rendering and mapping features offline, and brings with it many useful extra features such as custom waypoint and path editing. Charles Henninger will be leading the development of this piece of the solution
+
+
+This aspect of our solution will almost entirely be under the viewpoint of information. After this piece is finished, Map Rendering will occur automatically once the User downloads a content package. As stated in another section of our design, the content package will contain a metadata file with information on the map needed for the tour. After receiving the completion signal for the download with the relevant download ID, our app will open the metadata file and pull a few pieces of information from it. We will get two sets of latitude and longitude points, the name of the area, and a list of waypoints, each containing their relevant information (meaning location on the map, identification number, and any video or text information). Using the two sets of latitude and longitude points, we will use the Mapbox library to create a download request for an offline map. The downloading itself will be handled by the Mapbox SDK. We will use the name of the area (found in the metadata file) to label the map. This offline map tile file will be organized and saved within the Mapbox directories, and will be edited via native services in the Mapbox Mapview class. We will create waypoints on our newly downloaded map via this Mapview class, using the waypoint data found in the metadata file. Once the map has been completed, our Mapview object can be placed in and statically manipulated by our UI.
+
+
+
+
 \subsection{Design viewpoint: Interface}
 Do we need to introduce what is interface at here?
+
+\subsubsection{Android UI}
+This piece of our solution will be the UI of the mobile app on the Android platform. We plan to conform to the Android UI guidelines for the layout of most of the UI. We have decided to use XML for our UI on our Android platform due to XML’s  simplicity, clarity, and speed compared to other options like Java or SDL. This section of our solution will be developed by Charles Henninger.
+
+
+This portion of our application will be subject to the structure viewpoint. Once the app is opened, an XML file will display a menu of the tours currently downloaded will be shown to the User. The available tours will be listed as a list from top to bottom, one column and one tour in each row, ordered alphabetically by the name of the tour area. Swiping left on one of the tours will display an icon for deleting the tour, and an icon to display information on the tour. The information icon will bring up a small window detailing the size of the tour, and the number of waypoints located in the tour. The User can click an icon in the top left corner to display the menu for the app, or click on one of the available tours to display the map and waypoints for that tour. Both the menu button and available tour buttons will be Button XML objects that react with an onclick function. The menu will display buttons that, once clicked, will open the related XML file. Currently we plan on having menu buttons navigating to an available tours page (where the user can download new tours), a credits page (containing information on the developers), and a page displaying tours that have already been downloaded. The page for downloading new tours will be similar to the available tours page, with a list of tours organized by the name of the area they relate to. We will get this list via an API call to our server. Next to each tour will be a download icon that the User can click, if the tour has not already been downloaded, to begin the download for the tour files and the rendering of the map tiles for offline use. Navigating in to an available tour will open an XML file that will display the map of the area, complete with waypoints spread along the route. This map can be navigated by swiping across across the map to pan around the area, and pinching the map to zoom in/out. Clicking on the map will cause the application to check the coordinates of the area clicked. If the area matches a waypoint latitude and longitude values, then a menu will be displayed below the map containing that waypoints information, including videos and text files. Clicking back on the map will close this menu. All of what is described here is completed in XML with buttons and onclick events, with some calls to other sections of the app to get relevant information (such as using the Mapbox element’s native functions to cause the map to pan and zoom). Lastly, our credits page will be a simple XML file with text introducing the developers and perhaps a short message to the user.
+
+
 
 \subsubsection{iOS UI}
 One of the platforms that we will be designing on for this project is the iOS platform. Due to the nature of this project, the usability of the mobile app is an important part of the project. In this iOS user interface design section, we will discuss the different options for handling problems such as designing and implementing the UI for selecting content packages, downloading and removing them, as well as basics for tour layout. For solving these problems, I choose Xcode as the solution.
@@ -203,7 +229,15 @@ For design the Web Control Panel UI, I will start with a bare Bootstrap template
 
 \subsection{Design viewpoint: Interaction}
 
-\subsubsection{Remote API Interactions}
+\subsubsection{Android Remote API Interactions}
+This piece of our solution involves how we will download our content package files from our server onto the mobile device. Users will view available content packs in app and select which content packs that they want to download. Once a user confirms a download, the mobile app will make an API call to our web server and begin downloading the file. the service that we use for downloading files on the Android platform will be DownloadManager, which is a native Android service that is meant for larger files that require long running downloads and comes with many build in features, such as notifications for completed downloads, that would have to be manually added with other services. This section of our solution will be developed by Charles Henninger.
+
+
+Our Remote API interactions will on the Android platform (meaning requesting a download for the tour files from our server) will be under an interaction perspective and occur when the User confirms the download of a currently undownloaded tour. Once this happens, we will use the native DownloadManager class to make an HTTP download request to our server. From here, all we have to do is let DownloadManager handle the file download, and indicate an action when the file is completed. This action will initiate the map rendering process to begin, which will use Mapbox and a metadata file located in the newly downloaded tour file to create an offline map.
+
+
+
+\subsubsection{iOS Remote API Interactions}
 In this section, we are going to provide a solution that allows users download content packages to their iOS devices. Users also permit to see all available content packages and select the package that they wish to download. After users choose the package, the application start to download the package by making an API call to the web server. To achieve this goal, we have two technologies available, which are WKWebView and NSURLConnection.
 
 
@@ -270,7 +304,8 @@ pending
 
 
 \section{Conclusion}
-pending
+The unifying feature of each of our individual design pieces was the need for clarity and ease of use. This app will be used and maintained predominantly by people that have little to no developmental experience. Because of this, we must focus our designs to be simple to understand and use. 
+
 
 
 
