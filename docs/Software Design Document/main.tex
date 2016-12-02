@@ -117,38 +117,49 @@
 
 \section{Introduction}
 \subsection{Purpose}
-pending
+The purpose of this design document is to create a roadmap for our project and describe how we will use different technologies to achieve all of our client’s requirements.
 
 \subsection{Scope}
-pending
+This project will include a mobile application, the Trail Companion, that will work with custom content packages downloaded in the app. A website will be included for administrators to upload content packages to a server where the application then request and download the packages. The mobile application will provide the user with an interactive map of an area, the user’s location, and waypoints on within the area containing information about the park. This application will require no Internet access after downloading the content packages and application itself.
                                        
-\subsection{Context}
-pending
-
+                                       
 \subsection{Summary}
-pending
-
-\vspace{0.3cm}
-
+The Sweet Home Ranger District of the Willamette National Forest hosts a number of interpretive events throughout the year, which are led by staff experts. These events incur a substantial time and labor cost for their setup and operation, which occupy a significant portion of Ranger Station staff resources. Due to a desire to expand public outreach, volunteers at the Sweet Home Ranger District have proposed the development of a mobile application to showcase one of their most well known trails, the Santiam Wagon Road Trail, with a self-guided tour. The mobile application must be developed with the capability to provide the required services without the need to connect to the internet. The application will be able to provide an interactive map that provides the user with their current location on a trail, as well as waypoints that provide information about points of interest along the trail in the form of videos, audio recordings, and text articles. Ranger Station staff must also be able to design and publish new events through a website with little technical knowledge. Finally, this project must have minimal recurring costs, and must be available for both iOS and Android devices. The relevant viewpoints that we will be concerning with for this project are that of the developers, the administrators, and the users. We will take into account these viewpoints when designing our solutions to each of the requirements, and mold our design in accordance with what is best for each point of view.
 
 
 \section{Glossary}
-pending
+\newpage
+\begin{table}[ht]
+\begin{tabular}{| l | p{9cm} |}
+\hline
+\textbf{Term} & \textbf{Definition} \\ \hline
+Admin / Administrator & User who has access to create, modify, and publish content packages. \\ \hline
+Android & Mobile operating system developed by Google for use in smartphones and tablets. \\ \hline
+Application Program Interface (API) & Interface specifying how software components can integrate with various parts of a project or external resources. \\ \hline
+Content Package & Compressed and signed archive containing a map of a region, as well as waypoints and other multimedia resources. \\ \hline
+Web Control Panel & Administration website used to create, update, publish, or otherwise control content packages. \\ \hline
+Global Positioning System (GPS) & Tool used to provide high-accuracy location services to devices without requiring internet service. Available as long as there is a sufficient view of the sky. \\ \hline
+iOS & Mobile operating system developed by Apple for use in Apple mobile products, such as the iPhone, iPad, or iTouch. \\ \hline
+Interpretive Event & Educational events hosting exhibits or other multimedia resources. \\ \hline
+Mobile Application (app) & A piece of software designed to be run on a particular type of mobile operating system. \\ \hline
+Open Street Maps (OSM) & Open/Freely licensed map software for map images, GPS locations, and directions. {[}7{]} \\ \hline
+POI & Point of Interest \\ \hline
+Santiam Wagon Road & A historical site in the Willamette National Forest. [8] \\ \hline
+Signing & A process used to ensure software is coming from a known, good source and has not been tampered with. [9]\\ \hline
+User & Visitors utilizing the application \\ \hline
+USFS & United States Forest Service \\ \hline
+Waypoint & Used to mark Points of Interest on maps, which will refer to sites with some form of multimedia content. \\ \hline
+\end{tabular}
+\end{table} 
 
 
 
 \section{Body}
-\subsection{Identified stakeholders and design concerns}
-pending
-
-
-
-
-
+\subsection{Identified Stakeholders}
+Our primary stakeholders will be the Sweet Home District Ranger Station staff, as they will be the first content curators utilizing our application ecosystem. Our secondary stakeholder is our client, Nancy Hildebrandt, who is our primary point of contact and sponsor.
 
 
 \subsection{Design viewpoint: Context}
-Do we need to introduce what is interface at here?
 
 \subsubsection{Map rendering}
 What must be accomplished in this part of the solution is making a map visible and capable of interaction with the user. We will need to display a relevant map of the tour area, capable of zooming, refocusing on the location of the user, and displaying waypoints on the map that contain relevant information about the area, including videos and text files. In order to get quality offline map tiles that we can use in our application, we have decided to use libraries connected to OpenStreetMaps, a project that provides free geographic data for use in rendering maps. OpenStreetMaps has many libraries that may provide us the means to render maps offline. At this point in time, we are planning on going with our second option, Mapbox GL, for implementation on both the IOS and Android platform. Mapbox GL is a free service that offers high quality rendering and mapping features offline, and brings with it many useful extra features such as custom waypoint and path editing. Charles Henninger will be leading the development of this piece of the solution
@@ -160,7 +171,7 @@ This aspect of our solution will almost entirely be under the viewpoint of infor
 
 
 \subsection{Design viewpoint: Interface}
-Do we need to introduce what is interface at here?
+%Do we need to introduce what is interface at here?
 
 \subsubsection{Android UI}
 This piece of our solution will be the UI of the mobile app on the Android platform. We plan to conform to the Android UI guidelines for the layout of most of the UI. We have decided to use XML for our UI on our Android platform due to XML’s  simplicity, clarity, and speed compared to other options like Java or SDL. This section of our solution will be developed by Charles Henninger.
@@ -224,7 +235,17 @@ Since jQuery is a JavaScript library and has many features of HTML, it based on 
     \label{jiawei4}
 \end{figure}
 
-For design the Web Control Panel UI, I will start with a bare Bootstrap template, which only contains a navigation bar at the top. I provide a rough web control panel UI (Figure 4), the basic operation logic will be similarly with my iOS UI, which is display the map on the main page. After login/register, the administrator will be able to add new viewpoints with text instructions and videos. Once the administrator input all information of the viewpoints, the administrator just click “Submit” button to upload all information into our database. For displaying the map, I will use Bootstrap to leave an area and use jQuery to make the map dynamic and operable. On the navigation bar, I will add a few HTML buttons for providing more functions. For example, a webpage to let administrator modify the viewpoint which already saved in the database. I will use a HTML form to display all saved viewpoints and let the administrator to edit them. In a word, Bootstrap is the main method to design the layout of web control panel UI, and jQuery is the main method to make the map dynamic and operable.
+For design the Web Control Panel UI, I will start with a bare Bootstrap template, which only contains a navigation bar at the top. I provide a rough web control panel UI (Figure 4), the basic operation logic will be similarly with my iOS UI, which is display the map on the main page. After login/register, the administrator will be able to add new viewpoints with text instructions and videos. Once the administrator input all information of the viewpoints, the administrator just click "Submit" button to upload all information into our database. For displaying the map, I will use Bootstrap to leave an area and use jQuery to make the map dynamic and operable. On the navigation bar, I will add a few HTML buttons for providing more functions. For example, a webpage to let administrator modify the viewpoint which already saved in the database. I will use a HTML form to display all saved viewpoints and let the administrator to edit them. In a word, Bootstrap is the main method to design the layout of web control panel UI, and jQuery is the main method to make the map dynamic and operable.
+
+
+\subsubsection{Content Package Server API}
+In order to successfully communicate between our mobile applications and our Web Control Panel, we will be creating an application program interface (API) to handle both Content Package creation and downloading. These interfaces must be able to fully support both the creation and editing of a Content Package, publishing or hiding packages, as well as any and all functions that the mobile applications will be utilizing to view and download packages. This system will be viewed from an interface viewpoint and will be led by Duncan Millard.
+
+In order to properly manage the database of Content Packages, there will be several functions required. The first of which will be the ability to open a publish request on a particular package. This functionality will hold the content package in a review stage, where it awaits approval from a configurable number of admins. Each reviewer will inspect the content package from within the Web Control Panel UI, and submit their approval or denial. An approval will mark the package and ‘ready’ in the database, rather than the previous ‘pending’. Once a package is marked as ‘ready’, the original publisher may choose to release it. A single denial will revoke the publish request and force the process to restart. This will take the form of four functions: startPublish, approvePublish, denyPublish, and pushPublish. These functions will be keyed to the specific user performing the action. StartPublish will do the bulk of the staging. It will wrap up all uploaded files for the Content Package into a staging folder, begin malware scans on the files, and prepare to create a releasable zip file. On top of these it will handle the required database additions to mark the package as pending.
+
+The mobile applications will be heavily reliant on the functionality of the Content Package download server. From an interaction viewpoint, the mobile applications will have several tiers to their requests. The first, and most general, request will be to request a list of all available sites. This will be a list of all parks, districts, or other organizations that are part of the Trail Companion publishing community. From there, when a user asks for a particular site, the applications will request a list of available Content Packages. This request will be expecting a stripped down metadata for each package, consisting of the name, overall description, and filesize. Additional information may be added as it becomes available.
+
+Once the user has narrowed down which content package they want, the API will provide two additional functions. The first will be a complete metadata download, which will provide additional details in a preview form. The second will be a call to initiate a full download. After this download completes, the mobile applications will be able to confirm their download by hitting one last API function and sending up the computed hash of the zip they receive. In the event that this hash passes, a complete download will have taken place and the process can end.
 
 
 \subsection{Design viewpoint: Interaction}
@@ -277,29 +298,39 @@ As a class of iOS, it is built on iOS operating system, and has its own syntax. 
 
 In our application, we are going to use WKWebView class to display the available package data from our server. First, I will create a new WKWebView object using the init(frame:configuration:) method. And then, I will use the load(\_:) method to begin loading web content from our server and display all available content packages. If the user wants to stop loading the page, I will provide a stop button by stopLoading() method to stop loading. As Listing 1 show, I will include my URL in the code and begin to load the content by an API call. In addition, we are going to utilize NSURLConnection technics to download content packages from the web server. I will create a URL connection object with a delegate object that conforms to the NSURLConnectionDelegate and NSURLConnectionDataDelegate protocols. And then, once the user selects the content package, the app will send a request to the server. In detail, the NSURLConnectionDelegate protocol is mainly used for credential handling, but also handles connection completion. connection(\_:willSendRequestFor:) is the actual method to send requires. We just replace with our URL in the code, the request will send to our server and start to download the content package.
 
+\subsubsection{Operating System Environment}
 
+The proposed system has a heavy requirement on a specific software ecosystem that must be maintained. In this part, we have several requirements we must fulfill. From a top level interaction viewpoint, we must satisfy the ability to serve a dynamic web page to our admin users for tour creation, auditing, editing, and publishing. We must also provide a means for the storage of our Content Packages, as well as a gateway system for the mobile applications to call home and request information. All of this must come on top of a single operating system for ease of maintenance and inter-connectivity. Our system configuration tasks will be headed by Duncan Millard.
 
-\subsection{Design viewpoint: ???}
+To satisfy the ability to serve up a dynamic and responsive website, we will be relying on the hosting abilities of Node.JS to serve as our web server [12]. This will handle split duty between serving our Web Control Panel and acting as the primary handler for our Content Package download API. To better suit our needs, we will be taking advantage of the ExpressJS middle-ware that works along with NodeJS to provide robust and modular interactivity with HTTP interfaces [13].
 
-\subsubsection{???}
-context is here
+On the same server, we will be hosting a MySQLi database. This database will be accessed through the NodeJS server, and will not have any direct public facing interactions. 
 
+As our program will be taking in data from admin users and distributing it to mobile devices, the system must take reasonable steps to ensure that content is not malicious or unknowingly infected with known vulnerabilities. To achieve this, we will be using a NodeJS plug-in that links to ClamAV, which will also need to be installed and configured on our server.
 
+Underlying all of this will be the CentOS operating system. This will provide our application core with a free, well maintained, and stable platform to minimize base layer changes during our application’s life cycle. While our product will inevitably go through revisions and our underlying software stack may likely change, CentOS operates on 10 year support cycles, so transitions should be infrequent. As our system is heavily based on other open source projects, we will not be limited by license expiration or upkeep.
 
-
-
-
-
-
-
+To further support migration paths, our software environment will be delivered in the form of an imaged CentOS install. This will provide our team the ability to rapidly deploy our system on a new hardware platform without requiring hand-crafted software environments or tedious manual configuration. While some changes will need to happen, such as host name edits, the primary systems will be configured in an RPM or image format [14].
 
 
 
 
+\subsection{Design viewpoint: Structure}
+
+\subsubsection{Content Package Generation}
+As the primary method of delivering content to the users, the generation of our system’s Content Packages will be critical to the creation of a properly integrated solution. As these Content Packages are, theoretically, a complete record of the information that is necessary for our Mobile Applications to deliver complete guided tour functionality, completeness is key as well as an ability to verify the authenticity of the content. As a result of this, there are several components that must all work together in order to satisfy this feature overall. This feature will be headed by Duncan Millard.
+
+The primary component is deciding on what content should be in a Content Package in the first place. From a structure viewpoint, these Content Packages will contain a manifest file that describes all relevant metadata information for a package. These manifest files will be formatted as JSON files, allowing direct compatibility with the proposed Node.JS web server backend [10]. Each manifest will contain the following attributes: A package name formatted as a string, the name of the park the particular package is part of, a mapName that will be used internally with MapBox in the mobile applications, a pair of latitude/longitude pairs defining the map dimensions for a particular package, a description for the Content Package as a whole, and an array of waypoints. Each waypoint must contain a unique name, an integer for ordering, a coordinate pair for location, an overall description of that particular waypoint, and an assets array. The assets array will contain a listing of any and all video, audio, or text references and files relevant for a particular waypoint.
+
+Along with this metadata manifest, all video/audio/text files that have been uploaded by the content curator and are referenced at a waypoint must be present in the Content Package as well. This content will be used to provide a multimedia experience to a user of the application. This content will be placed into folders sorted by the name of the referencing waypoint. Each waypoint asset field will hold a file path its resources, and these paths must conform to the exact directory that an asset is located within. These assets will be pulled from a temporary staging area on the content server and bundled into a Content Package once the content curator has completed the tour creation screens in the Web Control Panel UI. All assets pulled from this directory should be scanned for known malware to prevent malicious content [11].
+
+To cut down on the required device space and download times, all data inside a Content Package will be compressed using zip compression. Zip compression allows singular files to be decompressed at a later time without decompressing the entire archive, which should function better in the storage constraints of a mobile device.
+
+As verifying the authenticity and completeness of Content Packages is a core requirement, there will be a layer to the Content Package download API that provides verification services. A mobile application will hash the complete zip archive upon completion of its download and request the expected hash string from the Content Package download server. If there is any discrepancy between the hashes, the download should be marked as a failure and the user will be prompted to redownload the Content Package.
 
 
 \section{Design rationale}
-pending
+This overall system was setup in such a way that any and all content required for a complete guided tour would be pre\-loaded onto a user's device. This was done in order to allow for users to visit locations without access to the Internet and still be able to access the tour content. All systems and libraries in use through this solution are free of charge for the scale that is expected, and do not rely on paid subscription services, as this will be a minimal budget application. 
 
 
 
@@ -308,7 +339,46 @@ The unifying feature of each of our individual design pieces was the need for cl
 
 
 
+\section{Gantt Chart}
+\newpsstyle{Important}{fillstyle=solid,fillcolor=red}
+\newpsstyle{NotImportant}{fillstyle=vlines}
+\begin{center}
+ 
+\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1, ChartShowIntervals]{21}{9} 
+%\PstGanttTask[TaskOutsideLabel={Configure GIT and workflow}]{2}{3}
 
+%------------------------WEB----------------------------------
+\PstGanttTask[TaskInsideLabel={Web Control Panel}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={Temp Hosting},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={Content Packages Database},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={User Account Database},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={User Account Login},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Content Package Prototype},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Content Package Signing},TaskUnitType=Day]{38}{10}
+\PstGanttTask[TaskOutsideLabel={Content Acquisition API},TaskUnitType=Day]{48}{10}
+%------------------------ANDROID----------------------------------
+\PstGanttTask[TaskInsideLabel={Android Application}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Map Rendering},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={External PoC Resource},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Asset Downloading},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Usability},TaskUnitType=Day]{38}{20}
+%------------------------IOS-----------------------------------
+\PstGanttTask[TaskInsideLabel={iOS Application}]{1}{8}
+\PstGanttTask[TaskOutsideLabel={GIT and workflow},TaskUnitType=Day]{8}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Map Rendering},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={External PoC Resource},TaskUnitType=Day]{18}{10}
+\PstGanttTask[TaskOutsideLabel={PoC Asset Downloading},TaskUnitType=Day]{28}{10}
+\PstGanttTask[TaskOutsideLabel={Usability},TaskUnitType=Day]{38}{20}
+
+
+%\PstGanttTask[TaskStyle=Important,TaskOutsideLabel={Task 3}, TaskInsideLabel={\Large\textcolor{white}{\textbf{Important}}}]{2}{5}
+%\PstGanttTask[TaskStyle=NotImportant,TaskOutsideLabel={Task 4}]{4}{2}
+%\PstGanttTask[TaskOutsideLabel={Task 5}]{5}{2}
+
+\end{PstGanttChart}
+\end{center}
 
 
 
@@ -347,7 +417,7 @@ The unifying feature of each of our individual design pieces was the need for cl
 
 
 \newpage %add references at here
-\begin{thebibliography}{9}
+\begin{thebibliography}{15}
 
 %%
 \bibitem{1} 
@@ -374,19 +444,69 @@ The unifying feature of each of our individual design pieces was the need for cl
 "Apple Developer," \textit{NSURLConnection}. [Online]. 
 \\Available: \texttt{https://developer.apple.com/reference/foundation/nsurlconnection} [Accessed: 14-Nov-2016].
 %%
+\bibitem{7} 
+"OpenStreetMap," \textit{OpenStreetMap}. [Online]. Available: https://www.openstreetmap.org/about. [Accessed: 04-Nov-2016]. \par
 
+\bibitem{8} 
+G. Harrison, "Santiam Wagon Road," \textit{The Oregon Encyclopedia}. [Online]. Available: \\ https://oregonencyclopedia.org/articles/santiam\_wagon\_road/. [Accessed: 04-Nov-2016]. \par
 
+\bibitem{9} 
+"Introduction to Code Signing," \textit{Microsoft Developer Network}. [Online]. Available: \\ https://msdn.microsoft.com/en-us/library/ms537361.aspx. [Accessed: 04-Nov-2016]. \par
 
+\bibitem{10} 
+"JSON.parse()," \textit{Mozilla Developer Network}.
+[Online]. Available: \\ 
+https://developer.mozilla.org/en\-US/docs/Web/JavaScript/Reference/Global\_Objects/JSON/parse.
+[Accessed: 01-Dec-2016]. \par
 
+\bibitem{11} 
+K. Farris, "Clamscan," \textit{Node Package Manager}.
+[Online]. Available: \\ 
+https://www.npmjs.com/package/clamscan.
+[Accessed: 01-Dec-2016]. \par
 
+\bibitem{12} 
+"Node.js" \textit{Node}.
+[Online]. Available: \\ 
+https://nodejs.org/en/.
+[Accessed: 01-Dec-2016]. \par
 
+\bibitem{13} 
+"Express - Node.js web application framework," \textit{Express JS}.
+[Online]. Available: \\ 
+http://expressjs.com/
+[Accessed: 01-Dec-2016]. 
 
-
-
-
-
-
-
+\bibitem{14} 
+"RPM Package Manager," \textit{RPM}.
+[Online]. Available: \\  
+http://rpm.org/.
+[Accessed: 01-Dec-2016]. \par
 
 \end{thebibliography}
+
+
+\newpage
+\textbf{ }
+\vspace{5.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Sponsor
+\vspace{3.0cm}
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
+\noindent\rule{13cm}{0.4pt}\\
+Developer
+\vspace{3.0cm}
+
+
 \end{document}
