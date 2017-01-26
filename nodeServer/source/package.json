@@ -1,0 +1,14 @@
+{
+  "name": "trailserver",
+  "version": "0.1.0",
+  "description": "Server hosting support for mobile application API",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js --test"
+  },
+  "author": "Duncan Millard",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

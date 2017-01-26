@@ -1,0 +1,5 @@
+To download required dependencies, run "npm install" in the same directory as server.js.
+
+Ensure nodejs and npm are installed.
+
+On a fresh OS install, it may be necessary to install the EPEL repository.
