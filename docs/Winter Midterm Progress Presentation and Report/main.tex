@@ -256,18 +256,111 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
 \section{Charles Henninger's Section}
-XXXXXXXXXXXXXXXX
+\subsection{Android App Development}
+The mobile application that we are developing for the Sweet Home Ranger District of the Willamette National Forest must be developed with the capability to provide the required services without the need to connect to the internet. The application will be able to provide an interactive map that provides the user with their current location on a trail, as well as waypoints that provide information about points of interest along the trail in the form of videos, audio recordings, and text articles. Ranger Station staff must also be able to design and publish new events through a website with little technical knowledge. Finally, this project must have minimal recurring costs, and must be available for both iOS and Android devices. The relevant viewpoints that we will be concerning with for this project are that of the developers, the administrators, and the users. We will take into account these viewpoints when designing our solutions to each of the requirements, and mold our design in accordance with what is best for each point of view. 
+
+Current progress of our application extends to our alpha prototype, which includes an Android and iOS user interface and the basic structure of our server planned out. The Android user interface will be implementing the paper prototype of the general user interface that our group created. At this stage in development our user interface contains a menu allowing navigation between the different pages of the application, a page containing a interactive mapbox mapview object, and a unique launch icon that will be the main logo of the application. 
+
+Most of the work that went into the development of the Android user interface for the alpha version of our application was centered around how the different features of the application were to be implemented later in the design process. The decision was between a single Android Activity (serving as the navigation drawer for the rest of the app) implementing many different Fragments, or having many Android Activities that the application would switch between. This design decision was one of the first major problems that we faced in development, and eventually came down to the compatibility of Mapbox (the third party software that we are using to render our maps) with Android Fragments. Implementing a Mapbox map on an Android Fragment is possible, but sacrifices a lot of the versatility of the Mapbox software to do so. Due to this, the decision was made to organize the application into many Android Activities that were extensions of the main Navigation menu Activity, thereby allowing the app to run many Activities and maintain access to an overarching Activity with handles navigation between them. The first step in this process was to create Activities for the Settings, Help, My Tours, and Discovery sections of our application that were descended from a generic Navigation Drawer Activity. In the Navigation Drawer Activity we created an overridden setContentView method that the other activities would call on creation, while passing the view id for their specific XML file. The Navigation Drawer Activity then inflates that Activity's XML layout inside a blank Framelayout located in it's XML file, right above the code for the Navigation Drawer. By doing this, we create more possibilities for each Activity to have it's own set of fragments, and insure that Mapbox will be working in a way that meets the requirements of this project. 
+
+With the general architecture of the Android application complete, attention will move to polishing the supporting features of the application (such as lists, usability settings, and Activity transitions), application aesthetics, and development of the communication between the server and the application. 
+
+The XML and Java code for the Navigation Drawer is listed below, as well as images from our application's UI and Mapbox Map.
+
+\subsection{Overridden Set Content View}
+\begin{minted}{java}
+public class Drawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
+   protected DrawerLayout fullLayout;
+   protected FrameLayout frameLayout;
+   @Override
+   public void setContentView(int layoutResID) {
+
+       //this appends the desired activity layout to the Drawer activity layout
+
+       fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer, null);
+       frameLayout = (FrameLayout) fullLayout.findViewById(R.id.drawer_frame);
+
+       getLayoutInflater().inflate(layoutResID, frameLayout, true);
+       super.setContentView(fullLayout);
+
+       //The navigation bar everything from here on
+
+       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
+
+       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+               this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+       drawer.setDrawerListener(toggle);
+       toggle.syncState();
+
+       NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+       navigationView.setNavigationItemSelectedListener(this);
+   }
+\end{minted}
+\begin{minted}{XML}
+
+(The XML file for the Drawer Activity. The layouts for other Activities will be inflated inside the FrameLayout located here)
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="fill_parent"
+   android:fitsSystemWindows="true"
+
+   android:id="@+id/drawer_layout"
+   tools:openDrawer="start">
+
+   <include
+       layout="@layout/app_bar_drawer"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
+
+   <FrameLayout
+       android:id="@+id/drawer_frame"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
+
+   <android.support.design.widget.NavigationView
+       android:id="@+id/nav_view"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_gravity="start"
+       android:fitsSystemWindows="true"
+       app:headerLayout="@layout/nav_header_drawer"
+       app:menu="@menu/activity_drawer_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
+
+\end{minted}
+
+
+
 
 \vspace{0.5cm}
 
 \section{Duncan Millard's Section}
+\subsection{Overview}
+While much of the work on our project solution is focused on the mobile applications, a critical aspect of the solution as a whole is our back end system. One of the original reasons for creating our project was to design a system such that Ranger staff would not need to allocate as many hours to compiling together the physical and recorded assets for seasonal Interpretive events. With the current methods, the Sweet Home Ranger staff are drafting and publishing posters and papers and then displaying them in site-specific billboards. This, along with recorded tours on cassette tapes, has a surprisingly large labor overhead for creating, deploying, and maintaining events. This said, one of the critical facets of our solution is to not just provide a user-friendly application for visitors, but to also provide a clean mechanism for managing the content published to the application.
 
-balabalabala
+\subsection{Server and Control Panel}
+In order to accomplish this task, we have decided to have a central server provide hosting and content serving abilities to act as a virtual warehouse of pre-made tours. This warehouse will also come with a content creation interface allowing Ranger staff to create and publish new tours. This segment will describe the progress that has been made in securing hardware, its configuration, and some pitfalls encountered along the way.
 
+In week 2 of this Winter term, our team has allocated Thursday afternoons at 14:00 to work as a unit. During these time slots, we will be taking advantage of the Capstone Lab in order to test both mobile applications and our central server at once. While we have simultaneous development across our systems, the primary blocker will be the applications requiring information from our server. As a result, I have been crafting pre-made content that can easily be emulated by our server to act in lieu of real production data.
 
+Starting with Week 3 of this term, we received an Intel NUC as a temporary server to use for our project from Dr. McGrath. The particular NUC we are using is an i7-5557U processor variant that is more than adequate for our needs. As we move forward to actually deploying our solution, this hardware will likely be left behind. In an effort to not waste hours of configuration work, we will be delivering an RPM file containing our server deployment. This server deployment file will allow us the ‘install’ our server software onto an arbitrary internet connected Centos 7 machine. As we have chosen Centos 7, we have over 5 years of support remaining for the packages and security lifespan. From the beginning of our server setup, I have been logging the packages that we have needed to install or configure. These packages will be added to our Content Server installation process as should be installed automatically as pre-requisites for our software upon deployment.
 
+One of the initial roadblocks that our team encountered with this server is that we were not able to hook it up arbitrarily into the OSU network. We had to request a particular Ethernet port to be allocated and opened for our own usage, as well as a hostname for our system. At the time of writing this, we have secured a home in the Capstone Lab on a dedicated Ethernet and power outlet. One issue we encountered when trying to utilize the allocated hostname was that during the Centos 7 installation, it requests a manual override for the hostname. I had entered a hostname at that time, not knowing what our eventual allocated name would be. As the allocated name is requested through DHCP, it should have taken effect immediately when IT enabled it. I had to clear the manually entered hostname before this would take effect.
 
+In addition to requiring a hostname, we also needed the appropriate ports opened. While port 22 (SSH) was opened ahead of time, getting a port like 80 (HTTP) or 443 (HTTPS) opened within the OSU firewall is a much more risky and slow process. As a result we will be using the NodeJs suggested port of 3000 for our Web Control Panel, and port 3001 for our content package API. The need for the ports to be manually opened was discovered when we attempted to run the pair of servers on the NUC. Localhost communications worked satisfactorily, yet Flip was unable to communicate. After requesting the ports opened and opening the Centos 7 local firewall settings, we are now able to communicate with our server through these interfaces.
 
+Beyond the basic system setup, I have started the design and implementation of our database tables. We will be using MySQL Community for Centos and have started implementing user logins and our permissions model.
+
+Our Web Control Panel UI design has started as well. We have several bare functionality sketches that indicate a minimum viable product for our UI, drawing out our page flow and minimal functionality. We have settled currently on using JQuery for the functional aspects of the UI, with Bootstrap CSS as a responsive design webkit to enable us to take advantage of rapid development and deployment. These projects are both based on the highly permissive MIT Open Source license, which allows us to use the projects in exchange for basic citing. 
 
 
 \newpage %add references at here
@@ -328,6 +421,26 @@ balabalabala
     \label{jiawei6}
 \end{figure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=1.2]{android1}
+    \caption{Android Launcher}
+    \label{charles1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=1.2]{android2}
+    \caption{MapBox Proof of Concept}
+    \label{charles2}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=1.2]{android3}
+    \caption{Android Drawer Menu}
+    \label{charles3}
+\end{figure}
 
 
 
