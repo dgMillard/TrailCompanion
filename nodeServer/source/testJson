@@ -1,0 +1,15 @@
+{
+  "siteName": "Santiam Flats Campground",
+  "description": "Reservable campground in the Santiam State Forest. Features a covered shelter, picnic benches, and camp sites.",
+  "map": {
+    "root": {
+      "latitude": 44.7117626,
+      "longitude": -122.11627722
+    },
+    "topLeft": {
+      "latitude": 44.71252504,
+      "longitude": -122.11777925
+    }
+  },
+  "version": "1.2"
+}
