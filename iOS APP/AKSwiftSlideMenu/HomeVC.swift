@@ -14,13 +14,42 @@ class HomeVC: BaseViewController, MGLMapViewDelegate {
     //my table view
     @IBOutlet weak var home_table: UITableView!
     
-    
-    
-    
     //my map
     @IBOutlet weak var home_map: MGLMapView!
     
+    //read json
+    /*
+    struct Waypoints {
+        let siteName: String
+        let description: String
+        //let version: String
+        let topLeft: (latitude: Double, longitude: Double)
+    }
     
+    extension My_waypoint {
+        init?(json: [String: Any]) {
+            guard let siteName = json["siteName"] as? String,
+                let topLeftJSON = json["topLeft"] as? [String: Double],
+                let latitude = coordinatesJSON["latitude"],
+                let longitude = coordinatesJSON["longitude"],
+                let description = json["description"] as? String
+                else {
+                    return nil
+            }
+            
+            
+            self.name = siteName
+            self.topLeftJSON = (latitude, longitude)
+            self.des = description
+        }
+    }*/
+    
+
+    
+    
+    
+    
+    //--------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         addSlideMenuButton()
@@ -53,7 +82,19 @@ override func didReceiveMemoryWarning() {
             // Always try to show a callout when an annotation is tapped.
             return true
         }
-    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+}
 
 
 
