@@ -9,7 +9,7 @@
   "author": "Duncan Millard",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "express": "^4.14.0",
     "install": "^0.8.7",

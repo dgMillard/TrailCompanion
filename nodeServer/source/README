@@ -3,3 +3,5 @@ To download required dependencies, run "npm install" in the same directory as se
 Ensure nodejs and npm are installed.
 
 On a fresh OS install, it may be necessary to install the EPEL repository.
+
+For node server to work properly, you will need a mysql.json file that contains the MySql login information in the same directoy. This is subject to change.
