@@ -37,8 +37,6 @@ function isUndefined(input)
 
 
 actionRouter.post('/login', function (req, res) {
-	console.log(req.body);
-
 
 	if( isUndefined(req.body))
 	{}
@@ -46,42 +44,21 @@ actionRouter.post('/login', function (req, res) {
 	var password = req.body.auth;
 	if( isUndefined(username) || isUndefined(password))
 	{
-		console.log(username);
-		console.log(password);
-		console.log('Invalid username or password. Return failure');
 		res.redirect('/login.html?retry=true');
 		res.end();
 		return;
 	}
-
-
-
-
-	console.log(username);
-	console.log(password);
+	
 	var success = false;
 
 	connection.query('SELECT password FROM User WHERE username = ?', [username],  function (error, results, fields) {
 		if (error) throw error;
-		if( results.length == 0)
+		if( !(results.length == 0))
 		{
-			
-			console.log('Username not found.');	
-			console.log(error);
-		}
-		else
-		{
-			console.log(results);
 			authToken = results[0].password;
-			console.log(authToken);
 
 			if(bcrypt.compareSync(password, authToken))
-			{
-				console.log("Got it!");
 				success = true;
-			}
-			else
-				console.log("Wrong");
 		}
 	    if(success)
 		{
@@ -118,15 +95,9 @@ pageRouter.get('/login.html', function (req, res) {
 		if(!isUndefined( req.query.retry))
 		{
 			failedLogin = true;
-			console.log("FAILED LOGIN");
-			}
+		}
 
-		
-
-		var rData = {errorMessage: ""}
-		if(failedLogin)
-			rData.errorMessage = "Error: Invalid Username/Password combination.";
-
+		var rData = {loginFailure: failedLogin}
 
 		var page = fs.readFileSync('login.html', "utf8"); 
 
