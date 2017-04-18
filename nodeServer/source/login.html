@@ -21,7 +21,7 @@ Password:<br>
 <input type="password" name="auth"><br><br>
 
 <input type="submit" name="submit" value="Log In">
-<p> {{errorMessage}}  </p>
+<p> {{#loginFailure}}Error message here{{/loginFailure}}  </p>
 </form>
 </div>
 
