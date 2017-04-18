@@ -8,27 +8,26 @@ var	mustache     = require('mustache') // bring in mustache template engine
 var bodyParser   = require('body-parser')
 var path		 = require('path')
 var bcrypt		 = require('bcrypt')
-var port 		 = 3001
 var mysql		 = require('mysql')
-var	demoData =[
-			"Item 1",
-			"Item 2",
-			"Item 3",
-			"Item 4"
-		];
-	
+
+var session   	 = require('express-session')
+var fileStore	 = require('session-file-store')(session);
+
+
 
 //Startup Config
+var port 		 = 3001
 var salt = bcrypt.genSaltSync(10);
-var dbInfo = require("./mysql.json") 
+var securityInfo = require("./security.json") 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : dbInfo.database.username,
-  password : dbInfo.database.password,
-  database : dbInfo.database.name
+  user     : securityInfo.database.username,
+  password : securityInfo.database.password,
+  database : securityInfo.database.name
 });
 connection.connect();
- 
+
+
 function isUndefined(input)
 {
 	return !(typeof input != 'undefined');
@@ -114,18 +113,6 @@ pageRouter.get('/dashboard.html', function (req, res) {
 });
 
 
-
-pageRouter.get('/demo', function(req, res){
-		var rData = {elementList: demoData}
-		var page = fs.readFileSync('demoPage.html', "utf8"); 
-
-		var html = mustache.to_html(page, rData); 
-		res.send(html);
-		});
-
-
-
-
 apiRouter.get('/listSpecific', function(req, res){
 		//	var rData = {records:demoData}
 		var jsonPage = fs.readFileSync('testJson', "ascii");
@@ -134,6 +121,16 @@ apiRouter.get('/listSpecific', function(req, res){
 
 		res.send(jsonPage);
 		});
+
+
+app.use(session({
+	resave: false,
+    saveUninitialized: false,	
+	store: new fileStore({}),
+	secret: securityInfo.session 
+}));
+
+
 
 
 app.use( bodyParser.urlencoded({
