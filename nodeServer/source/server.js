@@ -6,7 +6,7 @@ var app          = express()
 var	fs           = require('fs') // bring in the file system api
 var	mustache     = require('mustache') // bring in mustache template engine
 var bodyParser   = require('body-parser')
-
+var path		 = require('path')
 var bcrypt		 = require('bcrypt')
 var port 		 = 3001
 var mysql		 = require('mysql')
@@ -49,8 +49,7 @@ actionRouter.post('/login', function (req, res) {
 		console.log(username);
 		console.log(password);
 		console.log('Invalid username or password. Return failure');
-		res.status(400);
-		res.send("Missing information");
+		res.redirect('/login.html?retry=true');
 		res.end();
 		return;
 	}
@@ -86,16 +85,13 @@ actionRouter.post('/login', function (req, res) {
 		}
 	    if(success)
 		{
-			res.status(200);
-			res.send("Success");
+			res.redirect('/dashboard.html');
 			res.end();
 		}
 		else
 		{
-			res.status(401);
-			res.send("Bad Auth");
+			res.redirect('/login.html?retry=true');
 			res.end();
-			
 		}
 	});
 
@@ -105,15 +101,46 @@ actionRouter.post('/login', function (req, res) {
 
 
 pageRouter.get('/', function (req, res) {
-
 		// Check if already logged in
+		// redirect to dashboard
+		// else
+		// login page
+		
+		res.redirect('/login.html');
+
+});
 
 
-		var page = fs.readFileSync('login.html', "utf8"); // bring in the HTML file
+pageRouter.get('/login.html', function (req, res) {
 
+		
+		var failedLogin = false;
+		if(!isUndefined( req.query.retry))
+		{
+			failedLogin = true;
+			console.log("FAILED LOGIN");
+			}
+
+		
+
+		var rData = {errorMessage: ""}
+		if(failedLogin)
+			rData.errorMessage = "Error: Invalid Username/Password combination.";
+
+
+		var page = fs.readFileSync('login.html', "utf8"); 
+
+		var html = mustache.to_html(page, rData); 
+		res.send(html);
+
+});
+
+pageRouter.get('/dashboard.html', function (req, res) {
+		// Check if already logged in
+		var page = fs.readFileSync('dashboard.html', "utf8"); // bring in the HTML file
 		html = page;
 		res.send(html);
-		});
+});
 
 
 
