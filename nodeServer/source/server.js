@@ -9,7 +9,7 @@ var bodyParser   = require('body-parser')
 var path		 = require('path')
 var bcrypt		 = require('bcrypt')
 var mysql		 = require('mysql')
-
+var helmet		 = require('helmet') // Security middleware
 var session   	 = require('express-session')
 var fileStore	 = require('session-file-store')(session);
 
@@ -33,6 +33,21 @@ function isUndefined(input)
 	return !(typeof input != 'undefined');
 }
 
+
+actionRouter.post('/logout', function (req, res) {
+	req.session.destroy(function(err){
+		if(err){
+			console.log('Failed to logout/end user session.');
+		}
+		else
+		{
+			res.clearCookie(sessionOptions.name);
+			res.redirect('/login.html?logout=true');
+			res.end();
+		}
+	});
+
+});
 
 
 actionRouter.post('/login', function (req, res) {
@@ -61,6 +76,7 @@ actionRouter.post('/login', function (req, res) {
 		}
 	    if(success)
 		{
+			req.session.auth = true;
 			res.redirect('/dashboard.html');
 			res.end();
 		}
@@ -70,33 +86,46 @@ actionRouter.post('/login', function (req, res) {
 			res.end();
 		}
 	});
-
-
-
 });
 
 
 pageRouter.get('/', function (req, res) {
-		// Check if already logged in
-		// redirect to dashboard
-		// else
-		// login page
-		
-		res.redirect('/login.html');
+		//If user is already logged in, reroute to dashboard
+		if( req.session.auth )
+		{
+			res.redirect('/dashboard.html');
+			res.end();
+			return;
+		}
 
+		res.redirect('/login.html');
+		res.end();
 });
 
 
 pageRouter.get('/login.html', function (req, res) {
-
+	
+		//If user is already logged in, reroute to dashboard
+		if( req.session.auth )
+		{
+			res.redirect('/dashboard.html');
+			res.end();
+			return;
+		}
 		
 		var failedLogin = false;
-		if(!isUndefined( req.query.retry))
+		if(!isUndefined( req.query.retry) && req.query.retry)
 		{
 			failedLogin = true;
 		}
+		var userLogout = false;
+		if(!isUndefined( req.query.logout) && req.query.logout)
+		{
+			userLogout = true;
+		}
 
-		var rData = {loginFailure: failedLogin}
+
+		var rData = {loginFailure: failedLogin, userLoggedOut: userLogout}
 
 		var page = fs.readFileSync('login.html', "utf8"); 
 
@@ -105,12 +134,37 @@ pageRouter.get('/login.html', function (req, res) {
 
 });
 
+pageRouter.get('/tours/create.html', function (req, res) {
+	if(!req.session.auth )
+	{
+		res.redirect('/login.html');
+		res.end();
+		return;
+	}
+
+	var page = fs.readFileSync('create.html', 'utf8');
+
+	res.send(page);
+});
+
 pageRouter.get('/dashboard.html', function (req, res) {
 		// Check if already logged in
+		
+		var session = req.session;
+		if(! session.auth)
+		{
+			//User is not logged in, send them to login page
+			res.redirect('/login.html');
+			res.end();
+			return;
+		}
+
 		var page = fs.readFileSync('dashboard.html', "utf8"); // bring in the HTML file
 		html = page;
 		res.send(html);
 });
+
+
 
 
 apiRouter.get('/listSpecific', function(req, res){
@@ -122,16 +176,16 @@ apiRouter.get('/listSpecific', function(req, res){
 		res.send(jsonPage);
 		});
 
-
-app.use(session({
+var sessionOptions = {
 	resave: false,
     saveUninitialized: false,	
 	store: new fileStore({}),
-	secret: securityInfo.session 
-}));
+	secret: securityInfo.session,
+	name: 'sessionToken.sid'
+}
 
-
-
+app.use(session(sessionOptions));
+app.use(helmet());
 
 app.use( bodyParser.urlencoded({
 extended: true

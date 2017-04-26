@@ -1,0 +1,35 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/create.js"></script>
+</head>
+<body>
+Name Tour,
+Tour Description,
+
+
+Waypoint list
+Button to add waypoint
+Each waypoint gets x/y coords, some sort of file upload, a name, and a description.
+
+Average waypoint locations, use as center, then calc size from extremes
+Generate map, allow user to pan / zoom to ideal position
+<br><br>
+
+<form>
+Tour name:<br>
+<input type="text" name="tour_name"></input>
+<br>Tour description:<br>
+<input type="text" name="tour_desc"></input>
+<br>
+<ol id="waypoint_list">
+
+</ol>
+
+</form>
+
+<button onclick="addWaypoint()">Add Waypoint</button>
+
+</body>
+
+</html>
