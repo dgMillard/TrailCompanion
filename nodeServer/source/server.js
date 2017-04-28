@@ -11,6 +11,7 @@ var bcrypt		 = require('bcrypt')
 var mysql		 = require('mysql')
 var helmet		 = require('helmet') // Security middleware
 var session   	 = require('express-session')
+var fileUpload	 = require('express-fileupload')
 var fileStore	 = require('session-file-store')(session);
 
 
@@ -90,8 +91,30 @@ actionRouter.post('/login', function (req, res) {
 
 actionRouter.post('/upload', function (req, res) {
 
+	console.log(req.files);
 
+	if(! req.files || isUndefined(req.files.targetFile))
+	{
+		//No files submitted
+		res.status(400);
+		res.send("No files selected");
+		res.end();
+		return;
+	}
 
+	//Verify this exists first
+	var targetFile = req.files.targetFile;
+
+	//Fix filename
+	targetFile.mv('./fileVault/staging/file', function(err) {
+		if (err)
+		{
+			res.status(500);
+			res.send(err);
+			return;
+		}
+		res.send('Upload Complete');
+	});
 });
 
 
@@ -108,14 +131,7 @@ actionRouter.post('/submitTour', function (req, res) {
 		'0_wp_desc': '',
 		'0_wp_xloc': '',
 		'0_wp_yloc': '',
-		'1_wp_name': '',
-		'1_wp_desc': '',
-		'1_wp_xloc': '',
-		'1_wp_yloc': '',
-		'2_wp_name': '',
-		'2_wp_desc': '',
-		'2_wp_xloc': '',
-		'2_wp_yloc': '' }
+		'0_wp_file': '',
 	`
 
 	var tourName = req.body.tour_name;
@@ -128,7 +144,7 @@ actionRouter.post('/submitTour', function (req, res) {
 	//	Insert name/description/waypoint_count
 	//
 	//
-
+	console.log("received...");
 	console.log(req.body);
 	res.send("Success");
 	res.end();
@@ -232,7 +248,12 @@ var sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(helmet());
+app.use(fileUpload({
+	
+	limits: { fileSize: 256 * 1024 * 1024 },
+	safeFileNames: true
 
+}));
 app.use( bodyParser.urlencoded({
 extended: true
 }));

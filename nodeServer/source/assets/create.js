@@ -37,6 +37,10 @@ function submitTour()
 	});
 
 	parsed["waypoint_count"] = $("#waypoint_list li").length;
+	
+	//Upload each file,
+	//Then, if all succeed, submit final form
+
 
 	$.post("/actions/submitTour", parsed)
 	.done(function( data ) {
