@@ -17,6 +17,8 @@ Waypoint name:<br>
 <input type="text" name="${wpID}_wp_xloc"></input>
 <br>Waypoint Y loc:<br>
 <input type="text" name="${wpID}_wp_yloc"></input>
+<br>Attached File:<br>
+<input type="file" name="${wpID}_wp_file"></input>
 </li>
 `
 
