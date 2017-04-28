@@ -5,7 +5,7 @@ $(document).ready(function(){
 function addWaypoint()
 {
 
-var wpID = $("#waypoint_list").length;
+var wpID = $("#waypoint_list li").length;
 
 var newWaypoint = `
 <li>
@@ -21,7 +21,27 @@ Waypoint name:<br>
 `
 
 $("#waypoint_list").append(newWaypoint);
-alert("Added");
 
+}
+
+function submitTour()
+{
+	var data = $("#tour_form").serializeArray();
+	//Add ajax here
+	var parsed = {};
+
+	data.forEach(function(i){
+		parsed[i.name] = i.value;
+	});
+
+	parsed["waypoint_count"] = $("#waypoint_list li").length;
+
+	$.post("/actions/submitTour", parsed)
+	.done(function( data ) {
+		alert( "(Done) Got back:" + data );
+	})
+	.fail(function( data ) {
+		alert( "(Fail) Got back:" + data );
+	});
 
 }

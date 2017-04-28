@@ -16,9 +16,9 @@ Average waypoint locations, use as center, then calc size from extremes
 Generate map, allow user to pan / zoom to ideal position
 <br><br>
 
-<form>
+<form id="tour_form">
 Tour name:<br>
-<input type="text" name="tour_name"></input>
+<input type="text" name="tour_name";></input>
 <br>Tour description:<br>
 <input type="text" name="tour_desc"></input>
 <br>
@@ -29,6 +29,7 @@ Tour name:<br>
 </form>
 
 <button onclick="addWaypoint()">Add Waypoint</button>
+<button onclick="submitTour()">Submit</button>
 
 </body>
 

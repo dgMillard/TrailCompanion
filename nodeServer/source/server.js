@@ -88,6 +88,52 @@ actionRouter.post('/login', function (req, res) {
 	});
 });
 
+actionRouter.post('/upload', function (req, res) {
+
+
+
+});
+
+
+actionRouter.post('/submitTour', function (req, res) {
+	//Must verify cookie for post priveledge TODO
+//	var tourName = req.body.tourName;
+//	var tourDescription = req.body.tourDesc;
+	//Verify files exist before inserting into db
+	//Incoming data looks like:
+	//	
+	`{ tour_name: '1',
+		tour_desc: '2',
+		'0_wp_name': '',
+		'0_wp_desc': '',
+		'0_wp_xloc': '',
+		'0_wp_yloc': '',
+		'1_wp_name': '',
+		'1_wp_desc': '',
+		'1_wp_xloc': '',
+		'1_wp_yloc': '',
+		'2_wp_name': '',
+		'2_wp_desc': '',
+		'2_wp_xloc': '',
+		'2_wp_yloc': '' }
+	`
+
+	var tourName = req.body.tour_name;
+	var tourDescription = req.body.tour_desc;
+	var numWaypoints = req.body.waypoint_count;
+
+	//Must:
+	//
+	//	Verify variables
+	//	Insert name/description/waypoint_count
+	//
+	//
+
+	console.log(req.body);
+	res.send("Success");
+	res.end();
+
+});
 
 pageRouter.get('/', function (req, res) {
 		//If user is already logged in, reroute to dashboard
