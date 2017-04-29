@@ -10,6 +10,9 @@
     <meta name="author" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/create.js"></script>
+	<!-- MapBox CDN -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         #white_font {
             color: white;
@@ -86,7 +89,7 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <h1>Tour Creation Page</h1>
                 
                 <form id="tour_form">
@@ -102,17 +105,31 @@
 
             </form>
 
-        <button onclick="addWaypoint()" class="button">Add Waypoint</button>
-        <button onclick="submitTour()" class="button">Submit</button>
+			<button onclick="addWaypoint()" class="button">Add Waypoint</button>
+			<button onclick="submitTour()" class="button">Submit</button>
                 
                 
             </div>
+            <div class="col-lg-6">
+			
+			
+			<div id='map' style='width: 400px; height: 300px;'></div>
+			<script>
+			mapboxgl.accessToken = 'pk.eyJ1IjoibWlsbGFyZGQiLCJhIjoiY2oyMWMxdnhsMDAyYjJwcDJwYmZseThyZyJ9.jPFOTE3URTVGMbIz5a3d9g';
+			var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/outdoors-v9'
+			});
+			</script>
+			</div>
         </div>
     </div>
     <!-- /.container -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
 
 </body>
 

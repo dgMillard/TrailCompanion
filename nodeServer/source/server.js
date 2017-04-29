@@ -13,10 +13,11 @@ var helmet		 = require('helmet') // Security middleware
 var session   	 = require('express-session')
 var fileUpload	 = require('express-fileupload')
 var fileStore	 = require('session-file-store')(session);
-
+var mime		 = require('mime')
 
 
 //Startup Config
+var fileVault    = "/var/lib/trailCompanion/fileVault";
 var port 		 = 3001
 var salt = bcrypt.genSaltSync(10);
 var securityInfo = require("./security.json") 
@@ -91,28 +92,31 @@ actionRouter.post('/login', function (req, res) {
 
 actionRouter.post('/upload', function (req, res) {
 
-	console.log(req.files);
-
-	if(! req.files || isUndefined(req.files.targetFile))
+	if(! req.files || isUndefined(req.files.targetFile) || isUndefined(req.files.targetFile.name))
 	{
 		//No files submitted
 		res.status(400);
-		res.send("No files selected");
+		res.send("No files selected or invalid parameters provided.");
 		res.end();
 		return;
 	}
 
-	//Verify this exists first
 	var targetFile = req.files.targetFile;
+	var extension = mime.extension(targetFile.mimetype);
+	
+	var filename = targetFile.name;
 
-	//Fix filename
-	targetFile.mv('./fileVault/staging/file', function(err) {
+	var regex = new RegExp(extension + "$", 'gi');
+	filename = filename.replace(regex, '.' + extension);
+	targetFile.mv(fileVault + '/staging/' + filename, function(err) {
 		if (err)
 		{
 			res.status(500);
 			res.send(err);
 			return;
 		}
+
+		// All good:
 		res.send('Upload Complete');
 	});
 });
