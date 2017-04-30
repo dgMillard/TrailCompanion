@@ -16,12 +16,13 @@ var fileStore	 = require('session-file-store')(session);
 var mime		 = require('mime')
 var wait		 = require('wait.for')
 var archiver	 = require('archiver')
-var sha1 		 = require('sha1')
+var fileHash	 = require('hash-files')
+var sha1		 = require('sha1')
 
 
 //Startup Config
 var fileVault    = '/var/lib/trailCompanion/fileVault';
-var port 		 = 3001
+var port 		 = 3000
 var salt = bcrypt.genSaltSync(10);
 var securityInfo = require('./security.json') 
 var connection = mysql.createConnection({
@@ -133,7 +134,11 @@ actionRouter.post('/upload', function (req, res) {
 	var filename = targetFile.name;
 
 	var regex = new RegExp(extension + '$', 'gi');
+	
+	console.log("Extension is: " + extension);
+	console.log("Before: " + filename);
 	filename = filename.replace(regex, '.' + extension);
+	console.log("After: " + filename);
 	targetFile.mv(fileVault + '/staging/' + filename, function(err) {
 		if (err)
 		{
@@ -175,6 +180,7 @@ function handleTourSubmission(req, res)
 	var tourDescription = req.body.tour_desc;
 	var numWaypoints 	= req.body.waypoint_count;
 	var waypointJson 	= genWaypointJson( req.body );
+	var tourID = sha1(tourName + tourDescription + JSON.stringify(waypointJson)); 	
 	var mapData			= {
 		'topLeft' :{
 			'x' : req.body.map_topLeft_x,
@@ -191,6 +197,7 @@ function handleTourSubmission(req, res)
 		'organization' 		: 'Santiam Wagon Trail',
 		'tour_name'    		: tourName,
 		'tour_desc'      	: tourDescription,
+		'tour_uid'			: tourID,
 		'waypoint_count'    : numWaypoints,
 		'mapInfo'			: mapData,
 		'waypoints'    		: waypointJson
@@ -198,7 +205,6 @@ function handleTourSubmission(req, res)
 
 
 	// Zip Creation:
-	var tourID = sha1(tourName + tourDescription + JSON.stringify(waypointJson)); 	
 	var destinationStream = fs.createWriteStream(fileVault + '/database/' + tourID + '.zip');	
 	var archive = archiver('zip' , { store : true } );	
 	
@@ -227,7 +233,6 @@ function handleTourSubmission(req, res)
 			console.log('archiver has been finalized and the destinationStream file descriptor has closed.');
 			console.log('Now I can add myself to the DB....');
 			postToTours(req, res);
-
 	});
 
 
@@ -327,13 +332,24 @@ pageRouter.get('/dashboard.html', function (req, res) {
 
 
 apiRouter.get('/listSpecific', function(req, res){
-		//	var rData = {records:demoData}
-		var jsonPage = fs.readFileSync('testJson', 'ascii');
+	var jsonPage = fs.readFileSync('testJson', 'ascii');
+	res.send(jsonPage);
+});
+
+apiRouter.get('/listAll', function(req, res){
+	var jsonPage = fs.readFileSync('assets/tempListing.json', 'ascii');
+	res.send(jsonPage);
+});
 
 
+apiRouter.get('/download/:uid', function(req, res){
 
-		res.send(jsonPage);
-		});
+	var uid = "f9038ec83925e52dc11d02c9f0dd30325ccfcf87";
+
+	//Visit DB, find if tour is published, then get its archive location	
+	res.sendFile(fileVault + '/database/' + uid + '.zip');	
+
+});
 
 var sessionOptions = {
 	resave: false,
