@@ -76,7 +76,7 @@ function submitTour()
 
 	//Upload each file,
 	//Then, if all succeed, submit final form
-
+	var numDone = 0;
 	for(var i=0; i < numWaypoints; i++) 
 	{
 		var formData = new FormData();
@@ -108,7 +108,7 @@ function submitTour()
 						else if (this.explicitTotal)
 						{
 							//If server is not providing a total
-							self.progress = Math.min(1, evt.loaded / slef.explicitTotal);
+							self.progress = Math.min(1, evt.loaded / self.explicitTotal);
 						}
 						else
 							self.progress = 0;
@@ -123,16 +123,28 @@ function submitTour()
 				}
 				return monitorXHR;
 			},
-		});
-	}//End of file for loop
-	$.post("/actions/submitTour", parsed)
-	.done(function( data ) {
-		//alert( "(Done) Got back:" + data );
-	})
-	.fail(function( data ) {
-		//alert( "(Fail) Got back:" + data );
-	});
+		})
+		.done(function(){
+			numDone++;	
+			if(numDone == numWaypoints)
+			{
 
+				//This must be placed in a callback...
+
+				$.post("/actions/submitTour", parsed)
+				.done(function( data ) {
+					//alert( "(Done) Got back:" + data );
+					})
+				.fail(function( data ) {
+					//alert( "(Fail) Got back:" + data );
+					});
+
+				console.log("All uploads complete");
+			}
+			else
+				return;
+			});
+	}//End of file for loop
 
 
 }

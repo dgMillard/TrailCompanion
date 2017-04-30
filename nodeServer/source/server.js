@@ -14,13 +14,16 @@ var session   	 = require('express-session')
 var fileUpload	 = require('express-fileupload')
 var fileStore	 = require('session-file-store')(session);
 var mime		 = require('mime')
+var wait		 = require('wait.for')
+var archiver	 = require('archiver')
+var sha1 		 = require('sha1')
 
 
 //Startup Config
-var fileVault    = "/var/lib/trailCompanion/fileVault";
+var fileVault    = '/var/lib/trailCompanion/fileVault';
 var port 		 = 3001
 var salt = bcrypt.genSaltSync(10);
-var securityInfo = require("./security.json") 
+var securityInfo = require('./security.json') 
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : securityInfo.database.username,
@@ -29,12 +32,35 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-
-function isUndefined(input)
+// Helper function to check if variables are undefined. 
+function isUndefined( input )
 {
 	return !(typeof input != 'undefined');
 }
 
+// Translator function to convert form data into desired json format
+function genWaypointJson( input )
+{
+	var numWaypoints = input.waypoint_count;
+
+	var outputJson = new Array(numWaypoints);
+
+	for( var i=0; i < numWaypoints; i++)
+	{
+		var prefix = i + '_wp_';
+
+		outputJson[i] = {
+			'name' : input[prefix + 'name'],
+			'desc' : input[prefix + 'desc'],
+			'xLoc' : input[prefix + 'xloc'],
+			'yLoc' : input[prefix + 'yloc'],
+			'asset': input[prefix + 'filename'],
+			'index': i
+		}
+	}
+	console.log(outputJson);
+	return outputJson;
+}
 
 actionRouter.post('/logout', function (req, res) {
 	req.session.destroy(function(err){
@@ -96,7 +122,7 @@ actionRouter.post('/upload', function (req, res) {
 	{
 		//No files submitted
 		res.status(400);
-		res.send("No files selected or invalid parameters provided.");
+		res.send('No files selected or invalid parameters provided.');
 		res.end();
 		return;
 	}
@@ -106,7 +132,7 @@ actionRouter.post('/upload', function (req, res) {
 	
 	var filename = targetFile.name;
 
-	var regex = new RegExp(extension + "$", 'gi');
+	var regex = new RegExp(extension + '$', 'gi');
 	filename = filename.replace(regex, '.' + extension);
 	targetFile.mv(fileVault + '/staging/' + filename, function(err) {
 		if (err)
@@ -122,36 +148,103 @@ actionRouter.post('/upload', function (req, res) {
 });
 
 
-actionRouter.post('/submitTour', function (req, res) {
+function postToTours(req, res, metadata)
+{
+	res.status(200);
+	res.end("done early");
+	console.log("Zip should be done");
+	return;
+}
+function postToWaypoints(req, res, metadata)
+{
+}
+function finishTourSubmit(req, res)
+{
+}
+
+
+
+function handleTourSubmission(req, res)
+{
 	//Must verify cookie for post priveledge TODO
-//	var tourName = req.body.tourName;
-//	var tourDescription = req.body.tourDesc;
+	//	var tourName = req.body.tourName;
+	//	var tourDescription = req.body.tourDesc;
 	//Verify files exist before inserting into db
-	//Incoming data looks like:
-	//	
-	`{ tour_name: '1',
-		tour_desc: '2',
-		'0_wp_name': '',
-		'0_wp_desc': '',
-		'0_wp_xloc': '',
-		'0_wp_yloc': '',
-		'0_wp_file': '',
-	`
 
-	var tourName = req.body.tour_name;
+	var tourName 		= req.body.tour_name;
 	var tourDescription = req.body.tour_desc;
-	var numWaypoints = req.body.waypoint_count;
+	var numWaypoints 	= req.body.waypoint_count;
+	var waypointJson 	= genWaypointJson( req.body );
+	var mapData			= {
+		'topLeft' :{
+			'x' : req.body.map_topLeft_x,
+			'y' : req.body.map_topLeft_y
+		},
+		'bottomRight' :{
+			'x' : req.body.map_bottomRight_x,
+			'y' : req.body.map_bottomRight_y
+		}
+	};
+	
+	// Meta file:
+	var metadata = {
+		'organization' 		: 'Santiam Wagon Trail',
+		'tour_name'    		: tourName,
+		'tour_desc'      	: tourDescription,
+		'waypoint_count'    : numWaypoints,
+		'mapInfo'			: mapData,
+		'waypoints'    		: waypointJson
+	}
 
-	//Must:
-	//
-	//	Verify variables
-	//	Insert name/description/waypoint_count
-	//
-	//
-	console.log("received...");
-	console.log(req.body);
-	res.send("Success");
-	res.end();
+
+	// Zip Creation:
+	var tourID = sha1(tourName + tourDescription + JSON.stringify(waypointJson)); 	
+	var destinationStream = fs.createWriteStream(fileVault + '/database/' + tourID + '.zip');	
+	var archive = archiver('zip' , { store : true } );	
+	
+		
+	archive.on('error', function(err) {
+		//Remove the zip and respond to the res object
+		throw err;
+	});
+	
+	//For each file
+	for( var i=0; i < numWaypoints; i++)
+	{
+		var filename = waypointJson[i].asset;
+		archive.file('/var/lib/trailCompanion/fileVault/staging/' + filename, { name: 'waypoint' + i + path.extname(filename)});
+		
+	}
+	//Write the metadata
+	archive.append(JSON.stringify(metadata), { name: 'metadata.json' });
+
+	archive.pipe(destinationStream);
+	archive.finalize();
+
+	// listen for all archive data to be written 
+	destinationStream.on('close', function() {
+			console.log(archive.pointer() + ' total bytes');
+			console.log('archiver has been finalized and the destinationStream file descriptor has closed.');
+			console.log('Now I can add myself to the DB....');
+			postToTours(req, res);
+
+	});
+
+
+
+//	console.log('received...');
+//	console.log(req.body);
+//	res.send('Success');
+//	res.end();
+
+
+}
+
+
+actionRouter.post('/submitTour', function (req, res) {
+
+	//Spins off a fiber to handle this without trashing node mainloop
+	wait.launchFiber(handleTourSubmission, req, res);
 
 });
 
@@ -193,7 +286,7 @@ pageRouter.get('/login.html', function (req, res) {
 
 		var rData = {loginFailure: failedLogin, userLoggedOut: userLogout}
 
-		var page = fs.readFileSync('login.html', "utf8"); 
+		var page = fs.readFileSync('login.html', 'utf8'); 
 
 		var html = mustache.to_html(page, rData); 
 		res.send(html);
@@ -225,7 +318,7 @@ pageRouter.get('/dashboard.html', function (req, res) {
 			return;
 		}
 
-		var page = fs.readFileSync('dashboard.html', "utf8"); // bring in the HTML file
+		var page = fs.readFileSync('dashboard.html', 'utf8'); // bring in the HTML file
 		html = page;
 		res.send(html);
 });
@@ -235,7 +328,7 @@ pageRouter.get('/dashboard.html', function (req, res) {
 
 apiRouter.get('/listSpecific', function(req, res){
 		//	var rData = {records:demoData}
-		var jsonPage = fs.readFileSync('testJson', "ascii");
+		var jsonPage = fs.readFileSync('testJson', 'ascii');
 
 
 
