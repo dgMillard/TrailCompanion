@@ -22,16 +22,20 @@ var sha1		 = require('sha1')
 
 //Startup Config
 var fileVault    = '/var/lib/trailCompanion/fileVault';
-var port 		 = 3000
+var port 		 = 3001
 var salt = bcrypt.genSaltSync(10);
 var securityInfo = require('./security.json') 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : securityInfo.database.username,
-  password : securityInfo.database.password,
-  database : securityInfo.database.name
-});
-connection.connect();
+function dbConnect()
+{
+	var connection = mysql.createConnection({
+		host     : 'localhost',
+		user     : securityInfo.database.username,
+		password : securityInfo.database.password,
+		database : securityInfo.database.name
+	});
+	connection.connect();
+	return connection;
+}
 
 // Helper function to check if variables are undefined. 
 function isUndefined( input )
@@ -93,7 +97,7 @@ actionRouter.post('/login', function (req, res) {
 	}
 	
 	var success = false;
-
+	connection = dbConnect();
 	connection.query('SELECT password FROM User WHERE username = ?', [username],  function (error, results, fields) {
 		if (error) throw error;
 		if( !(results.length == 0))
@@ -114,6 +118,7 @@ actionRouter.post('/login', function (req, res) {
 			res.redirect('/login.html?retry=true');
 			res.end();
 		}
+		connection.end();
 	});
 });
 
@@ -135,10 +140,10 @@ actionRouter.post('/upload', function (req, res) {
 
 	var regex = new RegExp(extension + '$', 'gi');
 	
-	console.log("Extension is: " + extension);
-	console.log("Before: " + filename);
+	console.log('Extension is: ' + extension);
+	console.log('Before: ' + filename);
 	filename = filename.replace(regex, '.' + extension);
-	console.log("After: " + filename);
+	console.log('After: ' + filename);
 	targetFile.mv(fileVault + '/staging/' + filename, function(err) {
 		if (err)
 		{
@@ -155,13 +160,45 @@ actionRouter.post('/upload', function (req, res) {
 
 function postToTours(req, res, metadata)
 {
-	res.status(200);
-	res.end("done early");
-	console.log("Zip should be done");
+	
+	connection = dbConnect();
+
+	var queryString = 'INSERT INTO Tour (uid, organization, name, description, numberOfWaypoints, length, archiveLocation, version, topLeftX, topLeftY, bottomRightX, bottomRightY, published)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
+	var values = [
+		metadata.tour_uid,
+		metadata.organization,
+		metadata.tour_name,
+		metadata.tour_desc,
+		metadata.waypoint_count,
+		1,
+		fileVault + '/database/' + metadata.tour_uid + '.zip',
+		'1.0.0',
+		metadata.mapInfo.topLeft.x,
+		metadata.mapInfo.topLeft.y,
+		metadata.mapInfo.bottomRight.x,
+		metadata.mapInfo.bottomRight.y,
+		1	
+	];
+
+	//Verify tour does not already exist
+	connection.query(queryString, values,  function (error, results, fields) {
+		if (error)
+		{	
+			res.status(400);
+			res.end('Failed to add tour to DB.');
+			return;
+		}
+		console.log('INSERTED: ');
+		console.log(results);
+		postToWaypoints(req, res, metadata);	
+	});
 	return;
 }
 function postToWaypoints(req, res, metadata)
 {
+		connection.end();	
+		res.status(200);
+		res.end('done early');
 }
 function finishTourSubmit(req, res)
 {
@@ -218,7 +255,8 @@ function handleTourSubmission(req, res)
 	for( var i=0; i < numWaypoints; i++)
 	{
 		var filename = waypointJson[i].asset;
-		archive.file('/var/lib/trailCompanion/fileVault/staging/' + filename, { name: 'waypoint' + i + path.extname(filename)});
+		//archive.file('/var/lib/trailCompanion/fileVault/staging/' + filename, { name: 'waypoint' + i + path.extname(filename)});
+		archive.file('/var/lib/trailCompanion/fileVault/staging/' + filename, { name: filename });
 		
 	}
 	//Write the metadata
@@ -232,7 +270,7 @@ function handleTourSubmission(req, res)
 			console.log(archive.pointer() + ' total bytes');
 			console.log('archiver has been finalized and the destinationStream file descriptor has closed.');
 			console.log('Now I can add myself to the DB....');
-			postToTours(req, res);
+			postToTours(req, res, metadata);
 	});
 
 
@@ -337,14 +375,35 @@ apiRouter.get('/listSpecific', function(req, res){
 });
 
 apiRouter.get('/listAll', function(req, res){
-	var jsonPage = fs.readFileSync('assets/tempListing.json', 'ascii');
-	res.send(jsonPage);
+
+	connection = dbConnect();
+	connection.query('SELECT uid, name, description FROM Tour WHERE published = 1', function (error, results, fields) {
+		if (error) throw error;
+		
+		
+		var dataJson = { 'tourListings' : new Array(results.length) }
+
+		for(var i=0; i < results.length; i++)
+		{
+			dataJson.tourListings[i] = {
+				'tour_uid' :  	results[i].uid,
+				'tour_name':	results[i].name,
+				'tour_desc':	results[i].description
+			};
+		}
+
+		connection.end();
+
+		res.status(200);
+		res.send(dataJson);
+		return;
+	});
 });
 
 
 apiRouter.get('/download/:uid', function(req, res){
 
-	var uid = "f9038ec83925e52dc11d02c9f0dd30325ccfcf87";
+	var uid = 'f9038ec83925e52dc11d02c9f0dd30325ccfcf87';
 
 	//Visit DB, find if tour is published, then get its archive location	
 	res.sendFile(fileVault + '/database/' + uid + '.zip');	
