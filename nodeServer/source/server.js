@@ -22,7 +22,7 @@ var sha1		 = require('sha1')
 
 //Startup Config
 var fileVault    = '/var/lib/trailCompanion/fileVault';
-var port 		 = 3001
+var port 		 = 3000
 var salt = bcrypt.genSaltSync(10);
 var securityInfo = require('./security.json') 
 function dbConnect()
@@ -362,8 +362,17 @@ pageRouter.get('/dashboard.html', function (req, res) {
 		}
 
 		var page = fs.readFileSync('dashboard.html', 'utf8'); // bring in the HTML file
-		html = page;
+		var pageData = { 'published' : [
+			{
+				'name' : 'demoName',
+				'desc' : 'demoDesc',
+				'editLink' : 'revision.html?edit=uidHere' 
+			}
+		
+		] }
+		var html = mustache.to_html(page, pageData); 
 		res.send(html);
+		return;
 });
 
 
@@ -398,16 +407,46 @@ apiRouter.get('/listAll', function(req, res){
 		res.send(dataJson);
 		return;
 	});
+	return;
 });
 
 
 apiRouter.get('/download/:uid', function(req, res){
 
-	var uid = 'f9038ec83925e52dc11d02c9f0dd30325ccfcf87';
+	console.log(req.params.uid);
 
-	//Visit DB, find if tour is published, then get its archive location	
-	res.sendFile(fileVault + '/database/' + uid + '.zip');	
+	if(isUndefined(req.params.uid) || req.params.uid.length != 40)
+	{
+		res.status(400);
+		res.send("Invalid or missing uid");
+		return;
+	}
+	
+	var desiredUID = req.params.uid;
+	var realUID = '';
+	connection = dbConnect();
+	connection.query('SELECT uid FROM Tour WHERE published = 1 AND uid = ?', [desiredUID]  , function (error, results, fields) {
+		if (error) throw error;
+		
+		//Handle error gracefully...
+		console.log(results.length);
+		if(results.length === 1)
+		{
+			realUID = results[0].uid;
+			res.status(200);
+			res.sendFile(fileVault + '/database/' + realUID + '.zip');	
+		}
+		else
+		{
+			res.status(404);
+			res.end();
+		}
 
+		connection.end();
+		return;
+	});
+
+	return;
 });
 
 var sessionOptions = {
