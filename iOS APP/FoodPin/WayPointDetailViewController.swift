@@ -1,9 +1,9 @@
 //
-//  RestaurantDetailViewController.swift
-//  FoodPin
+//  WayPointDetailViewController.swift
+//  Trail
 //
-//  Created by Simon Ng on 20/7/2016.
-//  Copyright © 2016 AppCoda. All rights reserved.
+//  Created by Jiawei on 2017/4/29.
+//  Copyright © 2017年 OSU. All rights reserved.
 //
 
 import UIKit
@@ -77,14 +77,5 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         return cell
     } 
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

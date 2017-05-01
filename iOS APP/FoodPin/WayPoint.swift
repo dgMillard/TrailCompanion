@@ -1,11 +1,10 @@
 //
-//  Restaurant.swift
-//  FoodPin
+//  WayPoint.swift
+//  Trail
 //
-//  Created by Simon Ng on 21/7/2016.
-//  Copyright © 2016 AppCoda. All rights reserved.
+//  Created by Jiawei on 2017/4/29.
+//  Copyright © 2017年 OSU. All rights reserved.
 //
-
 import Foundation
 
 class Restaurant {
@@ -22,6 +21,5 @@ class Restaurant {
         self.location = location
         //self.phone = phone
         self.image = image
-        //self.isVisited = isVisited
     }
 }

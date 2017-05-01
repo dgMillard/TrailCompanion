@@ -1,9 +1,9 @@
 //
-//  RestaurantTableViewController.swift
-//  FoodPin
+//  WayPointTableViewController.swift
+//  Trail
 //
-//  Created by Simon Ng on 7/7/2016.
-//  Copyright © 2016 AppCoda. All rights reserved.
+//  Created by Jiawei on 2017/4/29.
+//  Copyright © 2017年 OSU. All rights reserved.
 //
 
 import UIKit
