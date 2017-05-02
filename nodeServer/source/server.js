@@ -349,6 +349,10 @@ pageRouter.get('/tours/create.html', function (req, res) {
 	res.send(page);
 });
 
+function populateDashboard(req, res, results)
+{
+}
+
 pageRouter.get('/dashboard.html', function (req, res) {
 		// Check if already logged in
 		
@@ -362,17 +366,34 @@ pageRouter.get('/dashboard.html', function (req, res) {
 		}
 
 		var page = fs.readFileSync('dashboard.html', 'utf8'); // bring in the HTML file
-		var pageData = { 'published' : [
+		connection = dbConnect();
+		connection.query('SELECT uid, name, description, organization FROM Tour WHERE published = 1', function (error, results, fields) {
+			if (error) throw error;
+		
+			//var pageData = { 'published' : [
+				//	'name' : 'demoName',
+				//	'desc' : 'demoDesc',
+				//	'editLink' : 'revision.html?edit=uidHere' 
+			//] }
+			var pageData = { 'published' : new Array( results.length ) };
+		
+			for( var i=0; i < results.length; i++)
 			{
-				'name' : 'demoName',
-				'desc' : 'demoDesc',
-				'editLink' : 'revision.html?edit=uidHere' 
+				pageData['published'][i] = 
+				{
+					'name' : results[i].name,
+					'desc' : results[i].description,
+					'organization' : results[i].organization,
+					'editLink' : '/tours/edit.html?tour=' + results[i].uid
+				}
 			}
 		
-		] }
-		var html = mustache.to_html(page, pageData); 
-		res.send(html);
-		return;
+			var html = mustache.to_html(page, pageData); 
+			res.send(html);
+			return;
+		});
+
+	return;
 });
 
 
