@@ -1,0 +1,7 @@
+If you want to run this application from the files in this folder, 
+you're going to need a functioning version of Android Studios to open the project in. Once you
+have it compiled in Android Studios, You should be able to run it on an emulator or a external 
+android device. If you do this, make sure you manually set the permissions for the app in your
+device's settings after installation. I haven't put in a permissions query for the app yet, but
+it will be included in a few days.
+That being said, even if you run the application, nothing will work unless the server is running.
