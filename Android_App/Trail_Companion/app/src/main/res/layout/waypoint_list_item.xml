@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="#ECEFF1"
+android:layout_marginBottom="1dp"
+android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:id="@+id/waypoint_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Waypoint 1"/>
+
+            <TextView
+                android:id="@+id/waypoint_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_below="@id/waypoint_name"
+                android:layout_marginTop="5sp"
+                android:layout_marginLeft="15sp"
+                android:text="* Check out our local favorite resturant here Mcdonalds! get the fires \n * This area is beautiful in the fall. Look at this picture for back when your mother visited me a few years ago!"/>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+
+                <Button
+                    android:id="@+id/video_button"
+                    android:layout_width="50sp"
+                    android:layout_height="wrap_content"
+                    android:text="VIDEO"
+                    android:textSize="8sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/pics_button" />
+
+                <Button
+                    android:id="@+id/pics_button"
+                    android:layout_width="50sp"
+                    android:layout_height="wrap_content"
+                    android:text="PICS"
+                    android:textSize="8sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <!--<ImageView
+            android:id="@+id/waypoint_image1"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:layout_marginLeft="30sp"
+            android:adjustViewBounds="true"/> -->
+    </LinearLayout>
+</LinearLayout>

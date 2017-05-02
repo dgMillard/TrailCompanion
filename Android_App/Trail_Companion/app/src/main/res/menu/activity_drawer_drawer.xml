@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mytours"
+            android:icon="@drawable/mytours"
+            android:title="My Tours" />
+        <item
+            android:id="@+id/discover"
+            android:icon="@drawable/discover"
+            android:title="Discover" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/help"
+            android:title="Help" />
+    </group>
+
+
+
+</menu>

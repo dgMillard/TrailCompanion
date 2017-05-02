@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="1dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".30">
+
+        <TextView
+            android:id="@+id/showtour_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="City"/>
+
+        <TextView
+            android:id="@+id/showtour_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:layout_below="@id/showtour_name"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="15sp"
+            android:text="Descriptiondaf"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/twobuttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".70">
+        <Button
+            android:id="@+id/tour_list_del"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textSize="8sp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/tour_view_button" />
+
+        <Button
+            android:id="@+id/tour_view_button"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:text="view"
+            android:textSize="8sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
