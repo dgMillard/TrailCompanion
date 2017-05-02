@@ -1,0 +1,20 @@
+This project is designed to be run a machine with an up-to-date version of nodejs installed,
+with an alias from node to nodejs. This project also requires a mysqli (httpd) process to be 
+configured and running, where the credentials are stored in a file called security.json, which 
+should be found in the same directory as the server.js file (TrailCompanion/nodeServer/source).
+
+This json config file should follow this format:
+
+{
+  "database": {
+    "username": "dbUsername",
+    "password": "hopefullySecurePassword",
+    "name": "Database name here"
+  },
+
+  "session": "uniqueSeedForSessionCookies"
+}
+
+
+In addition, you must run "npm install" in the same directory as the server.js file, before starting the server.
+Once you are ready to attempt to launch it, you may start it with "node server.js" from within the source folder.
