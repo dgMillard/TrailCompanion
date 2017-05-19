@@ -4,8 +4,8 @@
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECEFF1"
-    tools:context=".MainActivity">
+    android:background="@drawable/bark"
+    tools:context=".MyTours">
     <!--android:layout_marginTop="?attr/actionBarSize"-->
 
 <LinearLayout
@@ -19,19 +19,35 @@
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/_mapview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".9"
+        android:layout_height="350dp"
         mapbox:mapbox_cameraTargetLat="41.885"
         mapbox:mapbox_cameraTargetLng="-87.679"
         mapbox:mapbox_styleUrl="mapbox://styles/mapbox/outdoors-v9"
-        mapbox:mapbox_cameraZoom="10"/>
+        mapbox:mapbox_cameraZoom="14"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/waypoint_recycler"
         android:layout_width="match_parent"
-        android:layout_weight=".1"
         android:layout_height="wrap_content"
-        android:background="#ECEFF1"/>
+        android:background="@drawable/earth"/>
+    <LinearLayout
+        android:id="@+id/videoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/dismiss"
+            android:background="@drawable/close"
+            android:src="@null"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <VideoView
+            android:id="@+id/videoview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
 
 </LinearLayout>
 

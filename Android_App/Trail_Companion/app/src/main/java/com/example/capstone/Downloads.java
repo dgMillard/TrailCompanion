@@ -149,7 +149,8 @@ public class Downloads extends Drawer {
                     JSONObject j = new JSONObject(r);
                     JSONArray jTours = j.getJSONArray("tourListings");
                     for(int i = 0; i < jTours.length(); i++){
-                        loadAdapter.addTour(jTours.getJSONObject(i).getString("tour_uid"),jTours.getJSONObject(i).getString("tour_name"),jTours.getJSONObject(i).getString("tour_desc"));
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   PUT THIS BACK IN AFTER EXPO
+                        //loadAdapter.addTour(jTours.getJSONObject(i).getString("tour_uid"),jTours.getJSONObject(i).getString("tour_name"),jTours.getJSONObject(i).getString("tour_desc"));
                     }
                 } catch (JSONException e1) {
                     e1.printStackTrace();
@@ -158,7 +159,12 @@ public class Downloads extends Drawer {
             }
         });
 
-        loadAdapter.setDownloadbuttonclickedlistener(new DownloadsAdapter.OnDownloadbuttonclickedlistener() {
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DELETE AFTER EXPO
+
+        loadAdapter.addTour("bop","Writing Random Filler", "This is random filler that I'm just typing up real quick to demonstrate the functionality of this page and hopefully no one at expo will take the time to read this far into it why are you still reading come on cut me some slack.");
+        loadAdapter.addTour("boop","Example Tour", "Normally, this page would be filled with the names and descriptions for all tours available on the server. Unfortunately we only have sample tours on our server, and trying to download them over the school wifi during expo would be very tedious.");
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   PUT THIS BACK IN AFTER EXPO
+        /*loadAdapter.setDownloadbuttonclickedlistener(new DownloadsAdapter.OnDownloadbuttonclickedlistener() {
             @Override
             public void downloadbuttonclicked(String tourid,Context mcontext) {
                 Tour t = tourdb.getTour(tourid);
@@ -179,7 +185,7 @@ public class Downloads extends Drawer {
                     Toast.makeText(Downloads.this, "Tour already downloaded", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
     }
 
     private void unZip(String ID){

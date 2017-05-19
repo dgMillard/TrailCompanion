@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     android:orientation="vertical"
-    android:background="#ECEFF1"
+    android:background="@drawable/bark"
     tools:context="com.example.capstone.Downloads">
 
     <ProgressBar
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp"
-        android:background="#ECEFF1" />
+        android:background="@drawable/earth" />
 
 
 </LinearLayout>

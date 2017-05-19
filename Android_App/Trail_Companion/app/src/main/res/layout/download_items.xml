@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="#FFFFFF"
+    android:background="@drawable/fern_items"
+    android:layout_weight=".1"
     android:layout_marginBottom="1dp"
     android:orientation="vertical">
 
@@ -21,7 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
-                android:text="City"/>
+                android:text="City"
+                android:textColor="#000000"/>
 
         </RelativeLayout>
 
@@ -33,8 +35,8 @@
 
             <ImageButton
                 android:id="@+id/load_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:textSize="8sp"
                 android:background="@drawable/download"
                 android:layout_alignParentTop="true"
@@ -53,6 +55,8 @@
         android:layout_below="@id/D_region"
         android:layout_marginTop="5sp"
         android:layout_marginLeft="15sp"
-        android:text="Description"/>
+        android:text="Description"
+        android:textColor="#000000"/>
 
 </LinearLayout>
+

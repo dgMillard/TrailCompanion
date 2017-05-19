@@ -2,73 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:background="#ECEFF1"
 android:layout_marginBottom="1dp"
-android:orientation="vertical">
+android:orientation="vertical"
+android:background="@drawable/fern_items">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF">
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/waypoint_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:textColor="#000000"
                 android:text="Waypoint 1"/>
 
             <TextView
                 android:id="@+id/waypoint_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:layout_below="@id/waypoint_name"
+                android:textSize="11sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginLeft="15sp"
-                android:text=""
-                android:visibility="gone" />
+                android:textColor="#000000"
+                android:text="Description"
+                android:visibility="gone"/>
 
+            <ImageView
+                android:id="@+id/waypoint_pic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="gone"/>
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF">
+                android:layout_height="wrap_content">
 
                 <ImageButton
                     android:id="@+id/video_button"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/video"
                     android:src="@null"
-                    android:textSize="8sp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@+id/pics_button"
-                    android:visibility="gone" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="70dp"
+                    android:visibility="gone"/>
 
                 <ImageButton
                     android:id="@+id/pics_button"
                     android:background="@drawable/pic"
                     android:src="@null"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginRight="15dp"
-                    android:textSize="8sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
 
             </RelativeLayout>
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
