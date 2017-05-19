@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mytours"
-            android:icon="@drawable/mytours"
+            android:icon="@drawable/mymaps"
             android:title="My Tours" />
         <item
             android:id="@+id/discover"
@@ -15,9 +15,9 @@
             android:icon="@drawable/settings"
             android:title="Settings" />
         <item
-            android:id="@+id/help"
-            android:icon="@drawable/help"
-            android:title="Help" />
+            android:id="@+id/information"
+            android:icon="@drawable/info"
+            android:title="Information" />
     </group>
 
 

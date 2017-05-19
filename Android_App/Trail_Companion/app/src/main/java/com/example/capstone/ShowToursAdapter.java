@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,15 +68,15 @@ public class ShowToursAdapter extends RecyclerView.Adapter<ShowToursAdapter.Tour
     class TourItemHolder extends RecyclerView.ViewHolder {
         private TextView titleview;
         private TextView descview;
-        public Button viewbutton;
-        public Button deletebutton;
+        public ImageButton viewbutton;
+        public ImageButton deletebutton;
 
         public TourItemHolder(View itemView) {
             super(itemView);
             titleview = (TextView)itemView.findViewById(R.id.showtour_name);
             descview = (TextView)itemView.findViewById(R.id.showtour_desc);
-            viewbutton = (Button) itemView.findViewById(R.id.tour_view_button);
-            deletebutton = (Button) itemView.findViewById(R.id.tour_list_del);
+            viewbutton = (ImageButton) itemView.findViewById(R.id.tour_view_button);
+            deletebutton = (ImageButton) itemView.findViewById(R.id.tour_list_del);
         }
 
         //This is called from the ShowMyTours deletebuttonclickadapter. this deletes tours on the recycler view

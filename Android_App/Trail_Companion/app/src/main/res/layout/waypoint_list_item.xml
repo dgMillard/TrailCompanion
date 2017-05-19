@@ -33,7 +33,8 @@ android:orientation="vertical">
                 android:layout_below="@id/waypoint_name"
                 android:layout_marginTop="5sp"
                 android:layout_marginLeft="15sp"
-                android:text="* Check out our local favorite resturant here Mcdonalds! get the fires \n * This area is beautiful in the fall. Look at this picture for back when your mother visited me a few years ago!"/>
+                android:text=""
+                android:visibility="gone" />
 
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,33 +42,33 @@ android:orientation="vertical">
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF">
 
-                <Button
+                <ImageButton
                     android:id="@+id/video_button"
-                    android:layout_width="50sp"
-                    android:layout_height="wrap_content"
-                    android:text="VIDEO"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/video"
+                    android:src="@null"
                     android:textSize="8sp"
                     android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/pics_button" />
+                    android:layout_marginRight="15dp"
+                    android:layout_toLeftOf="@+id/pics_button"
+                    android:visibility="gone" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/pics_button"
-                    android:layout_width="50sp"
-                    android:layout_height="wrap_content"
-                    android:text="PICS"
+                    android:background="@drawable/pic"
+                    android:src="@null"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
                     android:textSize="8sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
         </LinearLayout>
-        <!--<ImageView
-            android:id="@+id/waypoint_image1"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:layout_marginLeft="30sp"
-            android:adjustViewBounds="true"/> -->
     </LinearLayout>
 </LinearLayout>

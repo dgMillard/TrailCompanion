@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -55,13 +56,13 @@ public class DownloadsAdapter extends RecyclerView.Adapter<DownloadsAdapter.Tour
     class TourItemHolder extends RecyclerView.ViewHolder {
         private TextView titleview;
         private TextView descview;
-        public Button downloadbutton;
+        public ImageButton downloadbutton;
 
         public TourItemHolder(View itemView) {
             super(itemView);
             titleview = (TextView)itemView.findViewById(R.id.D_region);
             descview = (TextView)itemView.findViewById(R.id.D_desc);
-            downloadbutton = (Button) itemView.findViewById(R.id.load_button);
+            downloadbutton = (ImageButton) itemView.findViewById(R.id.load_button);
         }
 
         public void bind(String title, String desc) {
