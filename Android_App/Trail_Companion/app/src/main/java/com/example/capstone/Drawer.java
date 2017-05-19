@@ -32,11 +32,23 @@ public class Drawer extends AppCompatActivity implements NavigationView.OnNaviga
     public void setContentView(int layoutResID) {
 
         //this appends the desired activity layout to the Drawer activity layout
+        int title = layoutResID;
         fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer, null);
         frameLayout = (FrameLayout) fullLayout.findViewById(R.id.drawer_frame);
 
         getLayoutInflater().inflate(layoutResID, frameLayout, true);
         super.setContentView(fullLayout);
+
+        switch(title){
+            case 1: title = R.layout.activity_show_my_tours;
+                this.setTitle("My Tours");
+
+            case 2: title = R.layout.activity_downloads;
+                this.setTitle("Available Downloads");
+
+            case 3: title = R.layout.information;
+                this.setTitle("App Information");
+        }
 
         //The navigation bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,6 +62,7 @@ public class Drawer extends AppCompatActivity implements NavigationView.OnNaviga
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -87,7 +100,7 @@ public class Drawer extends AppCompatActivity implements NavigationView.OnNaviga
             Intent intent = new Intent(Drawer.this, Downloads.class);
             startActivity(intent);
         } else if (id == R.id.settings) {
-        } else if (id == R.id.help) {
+        } else if (id == R.id.information) {
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

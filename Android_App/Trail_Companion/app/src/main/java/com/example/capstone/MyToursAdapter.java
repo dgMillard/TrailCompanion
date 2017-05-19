@@ -1,10 +1,12 @@
 package com.example.capstone;
 
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -51,16 +53,16 @@ public class MyToursAdapter extends RecyclerView.Adapter<MyToursAdapter.Waypoint
     class WaypointItemHolder extends RecyclerView.ViewHolder {
         private TextView waypointTitleView;
         private TextView waypointDescView;
-        public Button viewPicButton;
-        public Button viewVidButton;
+        public ImageButton viewPicButton;
+        public ImageButton viewVidButton;
 
 
         public WaypointItemHolder(View itemView) {
             super(itemView);
             waypointTitleView = (TextView)itemView.findViewById(R.id.waypoint_name);
             waypointDescView = (TextView)itemView.findViewById(R.id.waypoint_desc);
-            viewPicButton = (Button) itemView.findViewById(R.id.pics_button);
-            viewVidButton = (Button) itemView.findViewById(R.id.video_button);
+            viewPicButton = (ImageButton) itemView.findViewById(R.id.pics_button);
+            viewVidButton = (ImageButton) itemView.findViewById(R.id.video_button);
         }
 
         public void bind(String title, String desc) {
