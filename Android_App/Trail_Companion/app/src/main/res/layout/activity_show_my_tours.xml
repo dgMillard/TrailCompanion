@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="?attr/actionBarSize"
-    android:background="#ECEFF1"
+    android:background="@drawable/bark"
     tools:context="com.example.capstone.ShowMyTours">
 
 
@@ -14,11 +14,23 @@
         android:id="@+id/showtours_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ECEFF1"    />
+        android:background="@drawable/earth"    />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:visibility="gone"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
 
     <ProgressBar
         android:id="@+id/Delete_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:background="@drawable/sand"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_centerHorizontal="true"

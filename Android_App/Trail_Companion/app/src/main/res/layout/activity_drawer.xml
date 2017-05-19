@@ -11,7 +11,6 @@
 
     <include
         layout="@layout/app_bar_drawer"
-        android:background="#ECEFF1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -22,10 +21,11 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:background="#ECEFF1"
+        android:background="@drawable/fern"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:textColor="#FFFFF0"
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_drawer_drawer" />
 

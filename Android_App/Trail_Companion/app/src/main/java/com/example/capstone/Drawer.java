@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.provider.Settings;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
 
 /**
  * Created by Charles Henninger on 2/20/2017.
@@ -39,16 +42,6 @@ public class Drawer extends AppCompatActivity implements NavigationView.OnNaviga
         getLayoutInflater().inflate(layoutResID, frameLayout, true);
         super.setContentView(fullLayout);
 
-        switch(title){
-            case 1: title = R.layout.activity_show_my_tours;
-                this.setTitle("My Tours");
-
-            case 2: title = R.layout.activity_downloads;
-                this.setTitle("Available Downloads");
-
-            case 3: title = R.layout.information;
-                this.setTitle("App Information");
-        }
 
         //The navigation bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -99,8 +92,8 @@ public class Drawer extends AppCompatActivity implements NavigationView.OnNaviga
         } else if (id == R.id.discover) {
             Intent intent = new Intent(Drawer.this, Downloads.class);
             startActivity(intent);
-        } else if (id == R.id.settings) {
         } else if (id == R.id.information) {
+            setContentView(R.layout.information);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
