@@ -82,6 +82,7 @@
 				F4D336BE1D2E4309003010DD /* New Trail.app */,
 			);
 			name = Products;
+			path = Trail;
 			sourceTree = "<group>";
 		};
 		F4D336C01D2E4309003010DD /* trail */ = {
@@ -102,7 +103,7 @@
 				8EABE5231EB6FD6D00E26427 /* AboutVC.swift */,
 			);
 			name = trail;
-			path = FoodPin;
+			path = Trail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,12 +315,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = FoodPin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trail/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Jiawei;
 				PRODUCT_NAME = "New Trail";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -332,12 +333,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = FoodPin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trail/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Jiawei;
 				PRODUCT_NAME = "New Trail";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

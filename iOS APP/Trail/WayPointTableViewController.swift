@@ -2,7 +2,6 @@
 //  WayPointTableViewController.swift
 //  Trail
 //
-//  Created by Jiawei on 2017/4/29.
 //  Copyright © 2017年 OSU. All rights reserved.
 //
 
@@ -11,15 +10,17 @@ import UIKit
 class RestaurantTableViewController: UITableViewController {
 
     var restaurants:[Restaurant] = [
-        Restaurant(name: "Way Point 1", type: "Lake", location: "This is the description of waypoint 1", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 2", type: "Forest", location: "There is a beatiful forest here", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 3", type: "Lake", location: "There is a lovely lake here", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 4", type: "Lake", location: "You can fishing here", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 5", type: "Landscape", location: "The landscape is beatiful", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 6", type: "Lake", location: "Here is another lake", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 7", type: "Forest", location: "HUNTER×HUNTER", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 8", type: "Lake", location: "The third beatiful lake!", phone: "xxx", image: "huaji.jpg", isVisited: false),
-        Restaurant(name: "Way Point 9", type: "Tree House", location: "New waypoint, a tree house, you can hava a party here", phone: "xxx", image: "huaji.jpg", isVisited: false),
+        Restaurant(name: "Kelly Engineering Building", type: "Building", location: "Hey, That's where you are right now! That's some crazy stuff right there.", phone: "xxx", image: "kelly.jpg", isVisited: false),
+        Restaurant(name: "Robotics Expo Area", type: "Area", location: "Go check out the awesome robots over here during expo! One of the highlights for sure.", phone: "xxx", image: "robots.jpg", isVisited: false),
+        Restaurant(name: "MU", type: "Building", location: "The MU always smells like Panda Express. No one talks about it, but we all know it's true.", phone: "xxx", image: "MU.jpg", isVisited: false),
+        Restaurant(name: "Valley Library", type: "Building", location: "A very large portion of this application was written inside this building.", phone: "xxx", image: "library.jpg", isVisited: false),
+        Restaurant(name: "Sizzle Pie", type: "Food", location: "Great place to start the night out. Draft beer and pizza paired with a great atmosphere.", phone: "xxx", image: "pizza.jpg", isVisited: false),
+        Restaurant(name: "Ground Kontrol", type: "Bar", location: "This is a really nice bar arcade. Full bar and retro video games make for a very good time.", phone: "xxx", image: "mm.jpg", isVisited: false),
+        Restaurant(name: "Jimmy Mak's", type: "jazz", location: "This is (or was) THE place to see some live jazz at any day of the week in Portland. Talented artists and great location. Check out the balcony!", phone: "xxx", image: "jazz.jpg", isVisited: false),
+        Restaurant(name: "Golden Gate Park Conservatory", type: "Park", location: "As you venture into one of the first buildings situated in Golden Gate Park, you will encounter the oldest remaining municipal wooden conservatory in the United States. As the first public structures of its kind in the country, the Conservatory of Flowers serves as a safe haven for thought and imagination as visitors browse about some of the most exotic-looking blooms, sometimes presenting the beauty of colorful rarities. Highly praised in the world of history, architecture, engineering, and nature, the Conservatory of Flowers has been placed on the National Register of Historic Places, and is considered an intensely valued landmark in San Francisco.", phone: "xxx", image: "golden_gate_park.jpg", isVisited: false),
+        Restaurant(name: "Walt Disney Family Museum", type: "Museum", location: "The Walt Disney Family Museum is an American museum that features the life and legacy of Walt Disney. The museum is located in The Presidio of San Francisco, part of the Golden Gate National Recreation Area in San Francisco.", phone: "xxx", image: "mm.jpg", isVisited: false),
+        Restaurant(name: "Get Lunch Here!", type: "Food", location: "Best burritos of your life! go here.", phone: "xxx", image: "resturant.jpg", isVisited: false),
+        Restaurant(name: "Fort Point", type: "Landscape", location: "Fort Point has stood guard at the narrows of the Golden Gate for over 150 years. The Fort has been called the pride of the Pacific, the Gibraltar of the West Coast, and one of the most perfect models of masonry in America. When construction began during the height of the California Gold Rush, Fort Point was planned as the most formidable deterrence America could offer to a naval attack on California. Although its guns never fired a shot in anger, the Fort at Fort Point as it was originally named has witnessed Civil War, obsolescence, earthquake, bridge construction, reuse for World War II, and preservation as a National Historic Site.", phone: "xxx", image: "fort_point.jpg", isVisited: false),
         
     ]
     

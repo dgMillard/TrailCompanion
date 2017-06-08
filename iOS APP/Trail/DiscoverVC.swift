@@ -28,35 +28,66 @@ class DiscoverVC: UIViewController, MGLMapViewDelegate {
         
         mapview.delegate = self
         
-
+        // add waypoints on the map
         let pointA = MyCustomPointAnnotation()
-        pointA.coordinate = CLLocationCoordinate2D(latitude: 44.564178, longitude: -123.279444)
-        pointA.title = "OSU Campus"
-        //pointA.subtitle = "Corvallis, OR"
+        pointA.coordinate = CLLocationCoordinate2D(latitude: 37.769048, longitude: -122.473269)
+        pointA.title = "Golden Gate Park Conservatory"
+        pointA.subtitle = "San Fransisco"
         
         let pointB = MyCustomPointAnnotation()
-        pointB.coordinate = CLLocationCoordinate2D(latitude: 44.5535883, longitude: -123.2726553)
-        pointB.title = "Avery Park and Natural Area"
-        //pointB.subtitle = "Corvallis, OR"
+        pointB.coordinate = CLLocationCoordinate2D(latitude: 37.799167, longitude: -122.458506)
+        pointB.title = "Walt Disney Family Museum"
+        pointB.subtitle = "San Fransisco"
         
         let pointC = MyCustomPointAnnotation()
-        pointC.coordinate = CLLocationCoordinate2D(latitude: 44.5595762, longitude: -123.2814208)
-        pointC.title = "Reser Stadium"
-        //pointC.subtitle = "Corvallis, OR"
+        pointC.coordinate = CLLocationCoordinate2D(latitude: 37.778682, longitude: -122.478933)
+        pointC.title = "Get Lunch Here!"
+        pointC.subtitle = "San Fransisco"
         
         let pointD = MyCustomPointAnnotation()
-        pointD.coordinate = CLLocationCoordinate2D(latitude: 44.5652979, longitude: -123.2760134)
-        pointD.title = "The Valley Library"
-        //pointA.subtitle = "Corvallis, OR"
+        pointD.coordinate = CLLocationCoordinate2D(latitude: 37.809068, longitude: -122.477045)
+        pointD.title = "Fort Point"
+        pointD.subtitle = "San Fransisco"
         
-        let myPlaces = [pointA, pointB, pointC, pointD]
+        let pointE = MyCustomPointAnnotation()
+        pointE.coordinate = CLLocationCoordinate2D(latitude: 45.522914, longitude: -122.659333)
+        pointE.title = "Sizzle Pie"
+        pointE.subtitle = "Portland Nightlife"
+ 
+        let pointF = MyCustomPointAnnotation()
+        pointF.coordinate = CLLocationCoordinate2D(latitude: 45.523889, longitude: -122.675502)
+        pointF.title = "Ground Kontrol"
+        pointF.subtitle = "Portland Nightlife"
+        
+        let pointG = MyCustomPointAnnotation()
+        pointG.coordinate = CLLocationCoordinate2D(latitude: 45.524529, longitude: -122.681268)
+        pointG.title = "Jimmy Mak's"
+        pointG.subtitle = "Portland Nightlife"
+        
+        let pointH = MyCustomPointAnnotation()
+        pointH.coordinate = CLLocationCoordinate2D(latitude: 44.566861, longitude: -123.278461)
+        pointH.title = "Kelly Engineering Building"
+        pointH.subtitle = "Oregon State Campus"
+        
+        let pointI = MyCustomPointAnnotation()
+        pointI.coordinate = CLLocationCoordinate2D(latitude: 44.567255, longitude: -123.277925)
+        pointI.title = "Robotics Expo Area"
+        pointI.subtitle = "Oregon State Campus"
+        
+        let pointJ = MyCustomPointAnnotation()
+        pointJ.coordinate = CLLocationCoordinate2D(latitude: 44.565266, longitude: -123.278914)
+        pointJ.title = "MU"
+        pointJ.subtitle = "Oregon State Campus"
+        
+        let pointK = MyCustomPointAnnotation()
+        pointK.coordinate = CLLocationCoordinate2D(latitude: 44.565623, longitude: -123.276015)
+        pointK.title = "Valley Library"
+        pointK.subtitle = "Oregon State Campus"
+        
+        
+        let myPlaces = [pointA, pointB, pointC, pointD, pointE, pointF, pointG, pointH, pointI, pointJ, pointK]
         mapview.addAnnotations(myPlaces)
         
-        //follow user location
-        //let userLoc = mapview.userLocation!
-        //let userLat = userLoc.coordinate.latitude
-        //let userLon = userLoc.coordinate.longitude
-        //print(<#T##items: Any...##Any#>)
         mapview.setCenter(CLLocationCoordinate2D(latitude: 44.564174, longitude: -123.279306), zoomLevel: 13, animated: false)
         mapview.userTrackingMode = .follow
         

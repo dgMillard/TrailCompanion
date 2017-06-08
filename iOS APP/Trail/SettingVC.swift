@@ -12,22 +12,11 @@ import UIKit
 class SettingVC: UITableViewController, URLSessionDownloadDelegate, UIDocumentInteractionControllerDelegate {
     @IBOutlet weak var to_set: UIButton!
     @IBOutlet weak var down1: UIButton!
-    //@IBOutlet weak var down2: UIButton!
+
     
     var downloadTask: URLSessionDownloadTask!
     var backgroundSession: URLSession!
     
-    /*
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
- */
     
     @IBAction func junp_set(_ sender: Any) {
         if let url = URL(string:UIApplicationOpenSettingsURLString) {
@@ -35,7 +24,7 @@ class SettingVC: UITableViewController, URLSessionDownloadDelegate, UIDocumentIn
         }
     }
     
-    
+    // download the json file from the url
     @IBAction func act_down_1(_ sender: Any) {
         let url = URL(string: "http://www.kaleidosblog.com/tutorial/tutorial.json")!
         downloadTask = backgroundSession.downloadTask(with: url)
@@ -123,7 +112,7 @@ class SettingVC: UITableViewController, URLSessionDownloadDelegate, UIDocumentIn
     }
     
     /*---------------------
-     //parse json
+     //parse json example
     func extract_json(_ data: Data)
     {
         

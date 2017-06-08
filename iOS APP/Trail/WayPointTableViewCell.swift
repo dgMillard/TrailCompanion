@@ -1,18 +1,19 @@
 //
-//  WayPointDetailTableViewCell.swift
+//  WayPointTableViewCell.swift
 //  Trail
 //
-//  Created by Jiawei on 2017/4/29.
 //  Copyright © 2017年 OSU. All rights reserved.
 //
 
 import UIKit
 
-class RestaurantDetailTableViewCell: UITableViewCell {
+class RestaurantTableViewCell: UITableViewCell {
+    
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var typeLabel: UILabel!
+    @IBOutlet var thumbnailImageView: UIImageView!
 
-    @IBOutlet var fieldLabel:UILabel!
-    @IBOutlet var valueLabel:UILabel!
-        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
