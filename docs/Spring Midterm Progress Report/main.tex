@@ -431,7 +431,7 @@ public class MyToursAdapter extends RecyclerView.Adapter<MyToursAdapter.Waypoint
 }
 \end{minted}
 
-/section{Further Work}
+\section{Further Work}
 All that needs to be done for the Android application is the addition of audio files for the Waypoint assets view, and to iron out some storage issues that I have had with saving and reading large amounts of files from the Android application's internal storage. While the application works in its current state, changing this so that all files relevant to the functioning of the app are contained in the application's internal storage is necessary if we want to eventually put this application on the Google Play store.
 
 
@@ -440,8 +440,15 @@ All that needs to be done for the Android application is the addition of audio f
 
 \section{Duncan Millard's Section}
 
-Due to the illness, Duncan cannot work for that. Our group talked with Kevin and Kristen, they allow Duncan submit his part when he is health. Sorry for the inconvenience.  --Jiawei Liu
+\subsection{Web Control Panel Status}
 
+At the time of this report, the Web Control Panel is nominally functional. Functionality to create and publish tours has been added and is functional. The tours are added through a dynamic HTML form in the Web Control Panel (WCP). This form is submitted to the "Action" router embedded in our Node server. Once this "Action" router received the submission, it handles splitting the tour's information into the Tour table of our MySQL database, as well as uploading the assets needed for the tour. These assets are stored into a staging folder that is uniquely keyed off of a hash that is based on the tours name, description, and waypoint information. Once the upload is complete and the MySQL returns without error, it is pulled from the staging folder and loaded into a fileVault directory for permanent storage. Theoretically, in the future, tours in this section will be editable through form access. This would be done to add additional information, or to edit existing information and roll its version number. Currently, editing is not supported. The API calls needed by the Mobile Applications are functional and can provide a JSON listing of all available tours. In addition, a tour's zip archive may be downloaded based off of a tourID value that is found within the prior information request.
+
+\subsection{Problems Encountered}
+
+This stage of our project ran into two primary issues for me. The first was dealing with Node's use of callbacks for every operation that was not near instantaneous. Given Node is primarily single threaded for requests, having it wait while MySQL runs a potentially time intensive operation would significantly cut into its ability to serve other requests in the meantime. As a result, all function calls that rely on a potentially slow operation are pushed to an event loop running in the background. Designing my code to consider this an advantage rather than a limitation took a great deal of adjusting and experimenting in order to make it readable and functional.
+
+Second, I was unable to attend the Engineering Expo due to illness that resulted in multiple hospital visits. Fortunately, my team was able to still pull together a proper demonstration of our project and represent us at the Expo. 
 
 \vspace{0.5cm}
 
